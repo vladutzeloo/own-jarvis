@@ -15,7 +15,10 @@ updated: 2026-05-08
 - **Email:** vladimir.florea@olstral.com
 - **Vault root:** `C:\Users\vdzoo\Documents\obsidian\brain`
 - **Operating system:** Windows
-- **Primary tools:** Obsidian (this vault), Cowork (Claude desktop)
+- **Shell of choice:** PowerShell *(verify — confirm if also using WSL or git-bash for repo work)*
+- **Primary tools:** Obsidian (this vault), Cowork (Claude desktop), Claude Code on the web (for the `vladutzeloo/own-jarvis` repo)
+- **Vault repo:** `github.com/vladutzeloo/own-jarvis` — see [[00_Meta/git-conventions]] for branch/commit/PR rules
+- **Runtime stack:** see [[02_Capabilities/runtime]] for which surface is hosting which session, model defaults, and connector layout
 
 ## Role and work
 

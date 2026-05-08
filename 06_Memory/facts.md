@@ -17,6 +17,16 @@ Small set of facts Jarvis should keep loaded. Update when they change. Unlike mo
 - Vault: `C:\Users\vdzoo\Documents\obsidian\brain`
 - OS: Windows
 
+## Runtime and surfaces
+
+> *(Canonical detail in [[02_Capabilities/runtime]]. Repeated here because Jarvis needs these without loading the capability layer.)*
+
+- Vault repo: `github.com/vladutzeloo/own-jarvis` (default branch `main`)
+- Cowork (Claude desktop) is the primary day-to-day surface
+- Claude Code on the web is used for repo work; sandbox path is `/home/user/own-jarvis`
+- GitHub MCP in Claude Code is scoped to this repo only
+- Claude branch convention: `claude/<short-purpose>-<random6>`; PRs open as draft — see [[00_Meta/git-conventions]]
+
 ## Working pattern
 
 > *Fill in: time zone, deep-work hours, meeting density, recurring meetings.*

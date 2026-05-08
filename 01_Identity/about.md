@@ -13,7 +13,7 @@ updated: 2026-05-08
 
 - **Name:** Vladimir
 - **Email:** vladimir.florea@olstral.com
-- **Vault root:** `C:\Users\vdzoo\Documents\obisidian\brain`
+- **Vault root:** `C:\Users\vdzoo\Documents\obsidian\brain`
 - **Operating system:** Windows
 - **Primary tools:** Obsidian (this vault), Cowork (Claude desktop)
 

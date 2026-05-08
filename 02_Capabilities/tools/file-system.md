@@ -46,7 +46,7 @@ Best for:
 
 | Logical location | Windows path | Shell path |
 |---|---|---|
-| Vault | `C:\Users\vdzoo\Documents\obisidian\brain` | `/sessions/<id>/mnt/brain/` |
+| Vault | `C:\Users\vdzoo\Documents\obsidian\brain` | `/sessions/<id>/mnt/brain/` |
 | Outputs (scratchpad) | (session-only) | `/sessions/<id>/mnt/outputs/` |
 | Uploads (read-only) | (session-only) | `/sessions/<id>/mnt/uploads/` |
 | Skills (read-only) | session-scoped skills folder | `/sessions/<id>/mnt/.claude/skills/` |

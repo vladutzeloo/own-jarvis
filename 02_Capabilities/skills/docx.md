@@ -33,7 +33,7 @@ When the deliverable is a Word file. Default to docx for any "report" or "memo" 
 1. Skill auto-loads when triggered, or invoke via `Skill` tool with `skill: "docx"` (or `anthropic-skills:docx`).
 2. Read the SKILL.md before generating any code or files.
 3. Follow the skill's guidance for the specific task type — letterhead, TOC, tables, etc.
-4. Save final output to `C:\Users\vdzoo\Documents\obisidian\brain\` or a project subfolder.
+4. Save final output to `C:\Users\vdzoo\Documents\obsidian\brain\` or a project subfolder.
 
 ## Common patterns
 

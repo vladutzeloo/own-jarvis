@@ -28,7 +28,7 @@ The shell sees Linux paths; everything Vladimir interacts with on Windows is mou
 
 | Vladimir's path | Shell path |
 |---|---|
-| `C:\Users\vdzoo\Documents\obisidian\brain` | `/sessions/<id>/mnt/brain/` |
+| `C:\Users\vdzoo\Documents\obsidian\brain` | `/sessions/<id>/mnt/brain/` |
 | Cowork outputs scratchpad | `/sessions/<id>/mnt/outputs/` |
 | Uploads | `/sessions/<id>/mnt/uploads/` |
 | Skills | `/sessions/<id>/mnt/.claude/skills/` |

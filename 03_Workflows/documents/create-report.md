@@ -25,7 +25,7 @@ Word document with formal structure — executive summary, sections, conclusions
 
 **4. Generate the doc.** Follow the docx skill's guidance for headings, page numbers, TOC, letterheads as appropriate.
 
-**5. Save it.** Default location: a project subfolder under [[04_Projects/README]] if it's project-bound, or `C:\Users\vdzoo\Documents\obisidian\brain` for general work.
+**5. Save it.** Default location: a project subfolder under [[04_Projects/README]] if it's project-bound, or `C:\Users\vdzoo\Documents\obsidian\brain` for general work.
 
 **6. Surface the link.** Use a `computer://` link so Vladimir can open it directly.
 

@@ -1,0 +1,15 @@
+# Obsidian local state (machine-specific, shouldn't be committed)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Trash
+.trash/

@@ -432,7 +432,7 @@
 
             function typeChar() {
                 if (i < textToType.length) {
-                    typeElem.innerHTML += textToType.charAt(i);
+                    typeElem.textContent += textToType.charAt(i);
                     i++;
                     setTimeout(typeChar, 100 + Math.random() * 100);
                 }

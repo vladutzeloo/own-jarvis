@@ -51,6 +51,7 @@ These aren't third-party MCPs — they're Vladimir's own products. Documented he
 | VMES marketing site | https://vmes.ro | Live, fetchable | [[04_Projects/vmes/site/_index]] |
 | VMES CRM | https://crm.vmes.ro | Cert invalid — unreachable | [[04_Projects/vmes/crm/_index]] |
 | VMES source repo | GitHub (URL pending) | URL not yet captured | [[04_Projects/vmes/repo/_index]] |
+| NVIDIA API | https://build.nvidia.com | Planned integration | [[02_Capabilities/connectors/nvidia-api]] |
 
 For the integration plan, see [[04_Projects/vmes/integrations/_index]].
 

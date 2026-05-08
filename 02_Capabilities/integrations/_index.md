@@ -21,6 +21,7 @@ Anything that ships an MCP server belongs under [[02_Capabilities/connectors/REA
 | Integration | Used for | File |
 |---|---|---|
 | NVIDIA API | Hosted NIM model inference (Llama, Mixtral, Nemotron, etc.) | [[02_Capabilities/integrations/nvidia]] |
+| Google Jules API | Dispatch async coding tasks to Jules' autonomous agent (stub — confirm endpoint before first call) | [[02_Capabilities/integrations/jules]] |
 
 ## Adding a new integration
 

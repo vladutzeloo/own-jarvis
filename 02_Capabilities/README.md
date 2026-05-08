@@ -9,6 +9,8 @@ updated: 2026-05-08
 
 The set of things Jarvis can actually do, organized by mechanism. Before recommending an approach, check what's on the menu.
 
+For *where* all of this runs — which Claude surface, which model, which connectors are wired in — see [[02_Capabilities/runtime]] first. Capability docs assume the runtime is correct.
+
 ## The four layers of capability
 
 **Skills** are pre-packaged best-practice playbooks for a class of task — making a Word doc, building a PowerPoint, filling a PDF form. They live as `SKILL.md` files and load on demand. See [[02_Capabilities/skills/README]].
@@ -34,6 +36,7 @@ When Jarvis discovers a tool or pattern that isn't yet documented here, that's t
 
 ## Index
 
+- [[02_Capabilities/runtime]] — the substrate everything below runs on
 - [[02_Capabilities/skills/README]]
 - [[02_Capabilities/tools/README]]
 - [[02_Capabilities/connectors/README]]

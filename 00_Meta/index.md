@@ -20,6 +20,7 @@ The single map that points at every other map. When in doubt, start here.
 ## Capabilities (what Jarvis can do)
 
 - [[02_Capabilities/README]] — capability surface overview
+- [[02_Capabilities/runtime]] — surfaces, models, and platform that Jarvis runs on
 - [[02_Capabilities/skills/README]] — installed skills
 - [[02_Capabilities/tools/README]] — built-in tools
 - [[02_Capabilities/connectors/README]] — MCP connectors and integrations
@@ -49,4 +50,5 @@ The single map that points at every other map. When in doubt, start here.
 
 - [[00_Meta/vault-architecture]] — why the vault is shaped this way
 - [[00_Meta/conventions]] — frontmatter, tags, naming, links
+- [[00_Meta/git-conventions]] — branch, commit, and PR rules for the vault repo
 - [[99_Templates/README]] — reusable templates

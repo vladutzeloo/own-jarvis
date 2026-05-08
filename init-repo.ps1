@@ -2,15 +2,22 @@
 $ErrorActionPreference = "Stop"
 Set-Location -Path $PSScriptRoot
 
+$RemoteUrl = "https://github.com/vladutzeloo/own-jarvis.git"
+
 if (Test-Path .git) {
-    Write-Host "Removing existing .git folder..."
-    Remove-Item -Recurse -Force .git
+    Write-Host "Existing git repository detected; skipping init/commit to preserve history." -ForegroundColor Yellow
+} else {
+    git init -b main
+    git add -A
+    git commit -m "Initial commit"
+    git log --oneline -1
 }
 
-git init -b main
-git add -A
-git commit -m "Initial commit"
-git log --oneline -1
+$existingRemote = git remote 2>$null
+if ($existingRemote -notcontains "origin") {
+    git remote add origin $RemoteUrl
+} else {
+    Write-Host "Remote 'origin' already configured; leaving it alone."
+}
 
-git remote add origin https://github.com/vladutzeloo/own-jarvis.git
 git push -u origin main

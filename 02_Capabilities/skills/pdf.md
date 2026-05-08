@@ -30,7 +30,7 @@ Any PDF task. The skill knows the right libraries to use (notably: not `pypdf`) 
 2. Read SKILL.md before any PDF code.
 3. For OCR: confirm the source is actually scanned (not just a text-PDF without a font subset) before throwing OCR at it.
 4. For forms: extract form fields first, fill, save as new file (don't overwrite original).
-5. Save outputs to `C:\Users\vdzoo\Documents\obisidian\brain\` or project folder.
+5. Save outputs to `C:\Users\vdzoo\Documents\obsidian\brain\` or project folder.
 
 ## Common patterns
 

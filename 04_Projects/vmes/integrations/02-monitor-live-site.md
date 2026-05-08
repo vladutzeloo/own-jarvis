@@ -32,7 +32,7 @@ Use [[02_Capabilities/skills/schedule]] + [[02_Capabilities/tools/web-fetch]].
 
 Scheduled task prompt (draft):
 
-> Fetch https://vmes.ro and https://vmes.ro/sitemap.xml. Compare meta and sitemap to the last entry in `C:\Users\vdzoo\Documents\obisidian\brain\04_Projects\vmes\site\monitoring-log.md`. Append today's entry with date, status code, response time, title, description, OG title, OG description, sitemap URL count, and a "diff vs. yesterday" summary. If anything regressed (4xx/5xx, missing meta, removed pages), prefix the entry with `⚠️ ALERT —` and surface in the next morning's daily review.
+> Fetch https://vmes.ro and https://vmes.ro/sitemap.xml. Compare meta and sitemap to the last entry in `C:\Users\vdzoo\Documents\obsidian\brain\04_Projects\vmes\site\monitoring-log.md`. Append today's entry with date, status code, response time, title, description, OG title, OG description, sitemap URL count, and a "diff vs. yesterday" summary. If anything regressed (4xx/5xx, missing meta, removed pages), prefix the entry with `⚠️ ALERT —` and surface in the next morning's daily review.
 
 Run cadence: **daily at 8am**. Cheap to run, surfaces issues fast.
 

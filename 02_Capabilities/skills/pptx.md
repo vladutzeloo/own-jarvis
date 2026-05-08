@@ -31,7 +31,7 @@ Whenever a .pptx file is involved — input, output, or both. If Vladimir says "
 2. Read SKILL.md before touching any slides.
 3. Plan the deck structure first — title, agenda, sections, conclusion. Don't start at slide 1.
 4. Apply the skill's layout and font guidance consistently across slides.
-5. Save to `C:\Users\vdzoo\Documents\obisidian\brain\` or project folder.
+5. Save to `C:\Users\vdzoo\Documents\obsidian\brain\` or project folder.
 
 ## Common patterns
 

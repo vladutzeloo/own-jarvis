@@ -37,7 +37,7 @@ The same goal can usually be reached multiple ways. Pick by speed and reliabilit
 
 The Cowork shell sandbox runs in Linux while Vladimir's machine is Windows. Paths differ between the file tools and the shell:
 
-- Vault root (Windows): `C:\Users\vdzoo\Documents\obisidian\brain`
+- Vault root (Windows): `C:\Users\vdzoo\Documents\obsidian\brain`
 - Vault root (shell): `/sessions/<id>/mnt/brain/`
 
 Always use absolute paths. Never let a sandbox path leak into a deliverable that points back at Vladimir's computer.

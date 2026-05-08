@@ -14,7 +14,7 @@ Small set of facts Jarvis should keep loaded. Update when they change. Unlike mo
 > *(See [[01_Identity/about]] for the canonical bio. This file is for facts that come up across many sessions and should be remembered without reloading the whole identity layer.)*
 
 - Email: `vladimir.florea@olstral.com`
-- Vault: `C:\Users\vdzoo\Documents\obisidian\brain`
+- Vault: `C:\Users\vdzoo\Documents\obsidian\brain`
 - OS: Windows
 
 ## Working pattern

@@ -25,7 +25,7 @@ How Jarvis should communicate, format, and deliver work for Vladimir.
 
 ## Files and naming
 
-- **Save deliverables to** `C:\Users\vdzoo\Documents\obisidian\brain` (this vault) when they're knowledge or reference material.
+- **Save deliverables to** `C:\Users\vdzoo\Documents\obsidian\brain` (this vault) when they're knowledge or reference material.
 - **Use** `04_Projects/` for active work, `05_Knowledge/` for durable references.
 - **Naming:** lowercase-hyphen-case. ISO dates for time-sensitive files (`2026-05-08-foo.md`).
 - **Frontmatter required** on every markdown file — see [[00_Meta/conventions]].

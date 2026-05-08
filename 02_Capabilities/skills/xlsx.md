@@ -32,7 +32,7 @@ Whenever the primary deliverable is a spreadsheet. Even quick tabular outputs be
 2. Read SKILL.md before generating files.
 3. For data cleaning: identify malformed rows, misplaced headers, type mismatches before writing the output.
 4. For modeling: use named ranges, sheet-per-section, validation rules.
-5. Save to `C:\Users\vdzoo\Documents\obisidian\brain\` or project folder.
+5. Save to `C:\Users\vdzoo\Documents\obsidian\brain\` or project folder.
 
 ## Common patterns
 

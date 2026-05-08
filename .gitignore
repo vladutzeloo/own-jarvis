@@ -13,3 +13,8 @@ desktop.ini
 
 # Trash
 .trash/
+
+# Local secrets — never commit. Template lives at .env.example
+.env
+.env.local
+.env.*.local

@@ -19,6 +19,23 @@ Jarvis: when starting any non-trivial task, walk the vault in this order:
 4. **[[03_Workflows/README|How do we usually do this]]** — recipe library
 5. **[[06_Memory/README|What have we learned before]]** — past decisions and episodes
 
+## Setup (clone → run)
+
+After `git clone`, before doing anything that calls an external API:
+
+```bash
+cp .env.example .env
+# edit .env — fill in NVIDIA_API_KEY (and any future keys)
+```
+
+`.env` is gitignored and stays on your machine. `.env.example` is the committed template — when a new integration needs a credential, it gets a documented entry there. See [[02_Capabilities/integrations/_index]] for the integration catalog and [[02_Capabilities/integrations/nvidia]] for the NVIDIA API specifically.
+
+Windows / Cowork bootstrap (one-time, idempotent):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\init-repo.ps1
+```
+
 ## Map of the vault
 
 | Folder | Role | Entry point |

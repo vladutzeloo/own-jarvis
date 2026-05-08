@@ -62,11 +62,11 @@ Jules' niche is "fire-and-forget on a repo I trust it with" — so the `.env` an
 ## Egress and surface notes
 
 - **Cowork (Windows)** and **Claude Code CLI** can reach Google APIs without restriction.
-- **Claude Code on the web** uses an outbound allowlist; Google API hosts are typically on it, but the specific Jules host has not been verified as of 2026-05-08. If a call returns HTTP 403 with `x-deny-reason: host_not_allowed`, it is the sandbox proxy, not Jules. See [[02_Capabilities/runtime#Egress and network boundaries]].
+- **Claude Code on the web** uses an outbound allowlist; Google API hosts are typically on it, but the specific Jules host has not been verified as of 2026-05-08. If a call returns HTTP 403 with `x-deny-reason: host_not_allowed`, it is the sandbox proxy, not Jules. Run the call from Cowork or the CLI in that case. See [[02_Capabilities/runtime#Egress and network boundaries]].
 
 ## Operational notes
 
-- Treat `JULES_API_KEY` like a Claude or NVIDIA key. Rotate via the Jules dashboard if it leaks.
+- Treat `JULES_API_KEY` like a Claude or NVIDIA key. Rotate via the Jules dashboard if it leaks. Never paste it into a vault note, a chat, or a commit.
 - Jules acts on real repos. Restrict the key — and the wrapper script — to repos Vladimir is comfortable having an autonomous agent push to. Default-deny: do not give Jules write access to VMES production code without an explicit decision in [[06_Memory/decisions/README]].
 - When Jules opens a PR, surface it in the vault's PR-watching workflow (same as [[00_Meta/git-conventions]] expects for Claude-authored PRs).
 

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jules Interface - Own-Jarvis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #030811;
+            color: #4da6ff;
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Background Grid */
+        .grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(77, 166, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 166, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: moveGrid 10s linear infinite;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            transform-origin: center top;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 50px; }
+        }
+
+        .hud-container {
+            width: 800px;
+            height: 500px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #1a4d80;
+            background: radial-gradient(circle at center, rgba(10, 25, 50, 0.8) 0%, rgba(3, 8, 17, 0.9) 100%);
+            box-shadow: 0 0 30px rgba(26, 115, 232, 0.3), inset 0 0 50px rgba(0, 0, 0, 0.8);
+            clip-path: polygon(
+                30px 0,
+                calc(100% - 30px) 0,
+                100% 30px,
+                100% calc(100% - 30px),
+                calc(100% - 30px) 100%,
+                30px 100%,
+                0 calc(100% - 30px),
+                0 30px
+            );
+        }
+
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #4da6ff;
+        }
+        .tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid #1a4d80;
+            background: linear-gradient(90deg, rgba(26, 77, 128, 0.4) 0%, transparent 100%);
+        }
+
+        .title-box h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #e6f2ff;
+            text-shadow: 0 0 10px #4da6ff;
+            letter-spacing: 4px;
+        }
+
+        .title-box h2 {
+            margin: 5px 0 0 0;
+            font-size: 1rem;
+            color: #ffb347; /* Terran orange */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .resources {
+            display: flex;
+            gap: 20px;
+        }
+
+        .res {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        .res.minerals { color: #80c0ff; }
+        .res.vespene { color: #80ff80; }
+        .res.supply { color: #ff9933; }
+
+        .res-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .minerals .res-icon { background: #80c0ff; box-shadow: 0 0 8px #80c0ff; }
+        .vespene .res-icon { background: #80ff80; box-shadow: 0 0 8px #80ff80; }
+        .supply .res-icon { background: #ff9933; border-radius: 2px; box-shadow: 0 0 8px #ff9933; }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .portrait-area {
+            width: 250px;
+            border: 1px solid #1a4d80;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .portrait-frame {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CSS Wireframe Portrait Animation */
+        .wireframe-head {
+            width: 100px;
+            height: 140px;
+            border: 2px solid #4da6ff;
+            border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(77, 166, 255, 0.5), 0 0 20px rgba(77, 166, 255, 0.2);
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        .wireframe-eye {
+            position: absolute;
+            top: 50px;
+            width: 30px;
+            height: 15px;
+            border: 1px solid #4da6ff;
+            border-radius: 50%;
+            background: rgba(77, 166, 255, 0.2);
+        }
+        .wireframe-eye.left { left: 15px; }
+        .wireframe-eye.right { right: 15px; }
+
+        .wireframe-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(77, 166, 255, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 166, 255, 0.3) 1px, transparent 1px);
+            background-size: 10px 10px;
+            border-radius: inherit;
+            clip-path: circle(48% at 50% 50%);
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px #fff;
+            animation: scanline 3s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes scanline {
+            0% { top: -5%; }
+            100% { top: 105%; }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: inset 0 0 10px rgba(77, 166, 255, 0.3), 0 0 10px rgba(77, 166, 255, 0.1); }
+            100% { box-shadow: inset 0 0 30px rgba(77, 166, 255, 0.8), 0 0 30px rgba(77, 166, 255, 0.4); }
+        }
+
+        .status-bar {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #1a4d80;
+            background: rgba(26, 77, 128, 0.3);
+            color: #80ff80;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        .console-area {
+            flex-grow: 1;
+            border: 1px solid #1a4d80;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .console-header {
+            color: #a6c8ff;
+            border-bottom: 1px dashed #1a4d80;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .console-lines {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line {
+            margin: 5px 0;
+            opacity: 0;
+            animation: typeLine 0.5s forwards;
+        }
+
+        .line:nth-child(1) { animation-delay: 0.5s; }
+        .line:nth-child(2) { animation-delay: 1.5s; }
+        .line:nth-child(3) { animation-delay: 2.5s; }
+        .line:nth-child(4) { animation-delay: 3.5s; }
+        .line:nth-child(5) { animation-delay: 4.5s; color: #ffb347; }
+        .line:nth-child(6) { animation-delay: 5.5s; }
+
+        @keyframes typeLine {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .command-input {
+            display: flex;
+            margin-top: 10px;
+            color: #fff;
+        }
+        .command-input::before {
+            content: ">";
+            margin-right: 10px;
+            color: #4da6ff;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #4da6ff;
+            animation: cursorBlink 1s infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes cursorBlink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .action-panel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #1a4d80;
+        }
+
+        .btn {
+            background: rgba(26, 77, 128, 0.3);
+            border: 1px solid #4da6ff;
+            color: #a6c8ff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: rgba(77, 166, 255, 0.3);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(77, 166, 255, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Minimalistic circuit lines */
+        .circuit {
+            position: absolute;
+            background: #1a4d80;
+            z-index: -1;
+        }
+        .c1 { top: 100px; left: -50px; width: 100px; height: 2px; transform: rotate(45deg); }
+        .c2 { top: 135px; left: 20px; width: 50px; height: 2px; }
+        .c3 { bottom: 100px; right: -50px; width: 100px; height: 2px; transform: rotate(-45deg); }
+
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+
+    <div class="circuit c1"></div>
+    <div class="circuit c2"></div>
+    <div class="circuit c3"></div>
+
+    <div class="hud-container">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <header>
+            <div class="title-box">
+                <h1>JULES</h1>
+                <h2>Sub-Routine // OWN-JARVIS</h2>
+            </div>
+            <div class="resources">
+                <div class="res minerals"><span class="res-icon"></span> <span id="minerals">1542</span></div>
+                <div class="res vespene"><span class="res-icon"></span> <span id="vespene">489</span></div>
+                <div class="res supply"><span class="res-icon"></span> <span id="supply">198/200</span></div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="portrait-area">
+                <div class="scan-line"></div>
+                <div class="portrait-frame">
+                    <div class="wireframe-head">
+                        <div class="wireframe-grid"></div>
+                        <div class="wireframe-eye left"></div>
+                        <div class="wireframe-eye right"></div>
+                    </div>
+                </div>
+                <div class="status-bar">SYSTEM ONLINE</div>
+            </div>
+
+            <div class="console-area">
+                <div class="console-header">
+                    <span>TERMINAL_OUTPUT v2.4.1</span>
+                    <span>APM: <span id="apm">342</span></span>
+                </div>
+                <div class="console-lines">
+                    <div class="line">[SYSTEM] Initializing Jules neural net... OK</div>
+                    <div class="line">[JARVIS] Syncing with primary core... OK</div>
+                    <div class="line">[VAULT] Indexing 04_Projects directory... COMPLETE</div>
+                    <div class="line">[PROCESS] Analyzing request protocols...</div>
+                    <div class="line">[ALERT] Additional pylons may be required soon.</div>
+                    <div class="line">[JULES] Awaiting commander input...</div>
+                </div>
+
+                <div class="action-panel">
+                    <div class="btn">Scan Vault</div>
+                    <div class="btn">Deploy Fix</div>
+                    <div class="btn">Refactor</div>
+                    <div class="btn">Read Docs</div>
+                    <div class="btn">Run Tests</div>
+                    <div class="btn">Commit</div>
+                </div>
+
+                <div class="command-input">
+                    <span class="typing-text"></span><span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Resource animation
+        setInterval(() => {
+            const minElem = document.getElementById('minerals');
+            const vesElem = document.getElementById('vespene');
+            const apmElem = document.getElementById('apm');
+
+            if(Math.random() > 0.7) {
+                minElem.innerText = parseInt(minElem.innerText) + Math.floor(Math.random() * 5);
+            }
+            if(Math.random() > 0.8) {
+                vesElem.innerText = parseInt(vesElem.innerText) + Math.floor(Math.random() * 2);
+            }
+
+            // Fluctuating APM
+            let currentApm = parseInt(apmElem.innerText);
+            let newApm = currentApm + (Math.random() * 40 - 20);
+            if (newApm < 200) newApm = 200;
+            if (newApm > 450) newApm = 450;
+            apmElem.innerText = Math.floor(newApm);
+
+        }, 1000);
+
+        // Typing effect for the command line
+        setTimeout(() => {
+            const textToType = "execute protocol_alpha --verbose";
+            const typeElem = document.querySelector('.typing-text');
+            let i = 0;
+
+            function typeChar() {
+                if (i < textToType.length) {
+                    typeElem.innerHTML += textToType.charAt(i);
+                    i++;
+                    setTimeout(typeChar, 100 + Math.random() * 100);
+                }
+            }
+            typeChar();
+        }, 7000);
+    </script>
+</body>
+</html>

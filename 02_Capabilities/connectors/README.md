@@ -40,7 +40,28 @@ When Vladimir asks for something that lives in an external app:
 
 | Connector | Used for | Notes |
 |---|---|---|
-| _(none yet — see suggestions below)_ | | |
+| **Jarvis VPS API** | Phone PWA + jarvis.exe backend | `https://jarvis.vmes.ro/api/`. Auth: Bearer token (`JARVIS_SECRET`). Runs on OpenJarvis Ubuntu VPS. |
+| **Ollama / Qwen Coder** | Local AI for phone + desktop | `qwen2.5-coder:7b` via Ollama at `localhost:11434` on VPS. No cloud dependency. |
+
+## VPS API — integration contract for jarvis.exe
+
+The phone PWA and jarvis.exe both call the same API. Configure jarvis.exe with:
+
+| Setting | Value |
+|---|---|
+| API base URL | `https://jarvis.vmes.ro` |
+| Auth header | `Authorization: Bearer <JARVIS_SECRET>` |
+| Chat endpoint | `POST /api/chat` → `{ message, sessionId? }` |
+| Vault list | `GET /api/vault` |
+| Vault read | `GET /api/vault/read?path=<path>` |
+| Vault write | `POST /api/vault/write` → `{ path, content, commitMsg? }` |
+| Save episode | `POST /api/vault/episode` → `{ title, content }` |
+| Sessions list | `GET /api/sessions` |
+| Session history | `GET /api/sessions/:id` |
+
+Sessions are shared — a conversation started on the phone continues on the desktop and vice versa.
+
+Vault sync: VPS pulls from GitHub every 10 min. Vault writes commit + push immediately so Obsidian on Windows picks them up on the next `git pull`.
 
 ## First-party surfaces (Vladimir's own systems)
 

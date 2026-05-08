@@ -36,6 +36,16 @@ The model is set per surface and changes over time. Don't hard-code assumptions 
 
 The latest family is Claude 4.x. IDs in use: Opus 4.7 (`claude-opus-4-7`), Sonnet 4.6 (`claude-sonnet-4-6`), Haiku 4.5 (`claude-haiku-4-5-20251001`). When building anything against the API, default to the latest available — see [[02_Capabilities/skills/skill-creator]].
 
+## Egress and network boundaries
+
+Each surface has its own outbound network policy. This matters when Jarvis is asked to fetch a URL and the request fails — it is usually the surface, not the target.
+
+- **Claude Code on the web** uses an outbound allowlist. Hosts not on the list return HTTP 403 with header `x-deny-reason: host_not_allowed` from the sandbox proxy (the response is *not* from the target site). Confirmed blocked as of 2026-05-08: `vmes.ro` and subdomains. Symptom: WebFetch returns 403; `curl -I` returns the same with content-length 21.
+- **Cowork desktop** has broader egress and is the correct surface for fetches against Vladimir's own properties (`vmes.ro`, `crm.vmes.ro`) and for arbitrary scraping targets.
+- **Claude Code CLI** runs on the local machine, so it is constrained only by Vladimir's own network — same effective egress as a browser on his laptop.
+
+Rule of thumb: any task involving an HTTP fetch against a host that isn't a major public service (GitHub, npm, PyPI, common docs sites) should be done from Cowork or the CLI, not from Claude Code on the web.
+
 ## Connectors and MCP servers
 
 Connectors are MCP servers wired into a surface. The full inventory and registration flow live in [[02_Capabilities/connectors/README]]; this section only records the runtime-level facts.

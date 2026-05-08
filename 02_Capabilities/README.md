@@ -19,6 +19,8 @@ For *where* all of this runs — which Claude surface, which model, which connec
 
 **Connectors** are MCP servers that expose third-party services — Slack, Gmail, Calendar, Linear, Asana, etc. They go in and out of scope as Vladimir installs and uninstalls them. See [[02_Capabilities/connectors/README]].
 
+**Integrations** are hosted REST/SDK endpoints Jarvis calls directly with a credential from `.env` — NVIDIA API and similar. Distinct from connectors (no MCP) and tools (not built into the surface). See [[02_Capabilities/integrations/_index]].
+
 **Agents** are sub-Claudes Jarvis can dispatch for parallel or specialized work — exploration, planning, code review. See [[02_Capabilities/agents/README]].
 
 ## Decision tree: which layer to use
@@ -40,4 +42,5 @@ When Jarvis discovers a tool or pattern that isn't yet documented here, that's t
 - [[02_Capabilities/skills/README]]
 - [[02_Capabilities/tools/README]]
 - [[02_Capabilities/connectors/README]]
+- [[02_Capabilities/integrations/_index]]
 - [[02_Capabilities/agents/README]]

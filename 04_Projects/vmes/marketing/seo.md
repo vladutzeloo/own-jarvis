@@ -38,7 +38,7 @@ Three categories: **must-fix**, **should-fix**, **strategic**. The first two are
 
 ### Must-fix
 
-1. **Pre-rendered or server-rendered HTML.** A SPA that returns an empty `<div id="root">` to googlebot wastes the rest of the work below. Either pre-render with `vite-plugin-prerender` / `react-snap`, switch to a meta-framework (Next.js, Astro, Remix), or add a build-time static export of the home page.
+1. **Pre-rendered or server-rendered HTML.** Googlebot has rendered JS for years, but a SPA that returns an empty `<div id="root">` still costs indexing latency, degrades Core Web Vitals (specifically LCP — first paint of the empty shell can be fast, but the contentful paint waits on JS hydration), and is effectively invisible to non-rendering crawlers like social media unfurlers — LinkedIn, Slack, and X. Pre-render the home page (`vike`, `vite-plugin-prerender`, `react-snap`), switch to a meta-framework (Astro, Next.js, Remix), or add a build-time static export.
 2. **JSON-LD `Organization` and `SoftwareApplication` schemas in the static HTML.** Both are well-supported by Google rich results. Without these, Google has to infer everything about VMES from prose. Inject them server-side or in `index.html` directly.
 3. **OG image verified and at recommended dimensions** (1200×630, ≤ 5 MB, JPEG/PNG). The current OG presence flag in the baseline does not include image confirmation.
 
@@ -62,7 +62,7 @@ Three categories: **must-fix**, **should-fix**, **strategic**. The first two are
 
 Run this prompt from **Cowork** (Claude Code on the web cannot fetch vmes.ro — see [[02_Capabilities/runtime]]):
 
-> Fetch https://vmes.ro and https://vmes.ro/sitemap.xml. Extract: title, meta description, robots meta, canonical, all hreflang, html lang, all OG tags, all Twitter Card tags, all JSON-LD blocks (with @type values), theme-color, viewport, charset, any analytics scripts (GA, GTM, Plausible, Fathom), visible H1/H2 headings if present in static HTML, the primary CTA text, sitemap URL count and lastmod values. Mark each as PRESENT or MISSING. Append a date-stamped section to `04_Projects/vmes/marketing/seo.md` under "Audit history" with what changed since the last entry. If the page count grew, also update [[04_Projects/vmes/site/_index]].
+> Fetch https://vmes.ro and https://vmes.ro/sitemap.xml. Extract: title, meta description, robots meta, canonical, all hreflang, html lang, all OG tags, all Twitter Card tags, all JSON-LD blocks (with @type values), theme-color, viewport, charset, any analytics scripts (GA, GTM, Plausible, Fathom), visible H1/H2 headings if present in static HTML, the primary CTA text, sitemap URL count and lastmod values. Mark each as PRESENT or MISSING. **Prepend** a date-stamped section to the "Audit history" section of `04_Projects/vmes/marketing/seo.md` (newest entry at the top of that section, keeping the existing entries below) with what changed since the last entry. If the page count grew, also update [[04_Projects/vmes/site/_index]].
 
 Cadence: monthly, and after any deploy that changes `index.html`.
 

@@ -4,7 +4,10 @@ import { randomUUID } from 'crypto';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { initVault, readNote, writeNote, writeEpisode, listNotes, syncVault } from './vault.js';
-import { createSession, getSession, listSessions, touchSession, addMessage, getMessages, deleteSession } from './db.js';
+import {
+  createSession, getSession, listSessions, touchSession,
+  addMessage, getMessages, countMessages, deleteSession,
+} from './db.js';
 import { chat, healthCheck } from './ollama.js';
 import { buildSystemPrompt } from './prompt.js';
 
@@ -31,27 +34,28 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-// Health / status
+// ── Status ───────────────────────────────────────────────────────────────────
+
 app.get('/api/status', async (req, res) => {
   const ollama = await healthCheck();
   res.json({ ok: true, ollama });
 });
 
-// ── Chat ────────────────────────────────────────────────────────────────────
+// ── Chat ─────────────────────────────────────────────────────────────────────
 
 app.post('/api/chat', async (req, res) => {
-  const { message, sessionId: clientSessionId } = req.body;
+  // platform: 'phone' | 'desktop' | 'api' — lets sessions show which device sent a message
+  const { message, sessionId: clientSessionId, platform = 'phone' } = req.body;
   if (!message?.trim()) return res.status(400).json({ error: 'message required' });
 
   const sessionId = clientSessionId || randomUUID();
-  touchSession(sessionId, message.slice(0, 60));
+  touchSession(sessionId, message.slice(0, 60), platform);
   addMessage(sessionId, 'user', message);
 
-  // Build history for Ollama (last 20 messages)
+  // Last 20 messages for Ollama context
   const history = getMessages(sessionId).slice(-20);
   const ollamaMessages = history.map((m) => ({ role: m.role, content: m.content }));
 
-  // Inject system prompt
   const systemPrompt = await buildSystemPrompt();
   const messages = [{ role: 'system', content: systemPrompt }, ...ollamaMessages];
 
@@ -59,7 +63,7 @@ app.post('/api/chat', async (req, res) => {
     const reply = await chat(messages);
     addMessage(sessionId, 'assistant', reply);
 
-    // Auto-save episode if conversation is substantial
+    // Auto-save to vault when user explicitly asks, or when session gets long
     maybeAutoSave(sessionId, message, reply);
 
     res.json({ reply, sessionId });
@@ -69,17 +73,34 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Auto-save notable exchanges as vault episodes (fire and forget)
+// Save an episode when user explicitly asks, or after every 10th exchange
 function maybeAutoSave(sessionId, userMsg, assistantMsg) {
   const lower = userMsg.toLowerCase();
-  if (lower.includes('save this') || lower.includes('remember this') || lower.includes('note this')) {
-    const title = userMsg.slice(0, 60).replace(/[^\w\s-]/g, '');
-    const content = `**User:** ${userMsg}\n\n**Jarvis:** ${assistantMsg}`;
-    writeEpisode(title, content).catch((e) => console.error('[episode] save failed:', e.message));
-  }
+  const explicit = lower.includes('save this') || lower.includes('remember this') || lower.includes('note this');
+  const msgCount = countMessages(sessionId);
+  const milestone = msgCount > 0 && msgCount % 20 === 0; // every 10 exchanges (20 messages)
+
+  if (!explicit && !milestone) return;
+
+  const title = explicit
+    ? userMsg.slice(0, 60).replace(/[^\w\s-]/g, '').trim()
+    : `Session ${new Date().toISOString().slice(0, 10)} (${msgCount} messages)`;
+
+  const body = explicit
+    ? `**Vladimir:** ${userMsg}\n\n**Jarvis:** ${assistantMsg}`
+    : buildSessionSummary(sessionId);
+
+  writeEpisode(title, body).catch((e) => console.error('[episode] save failed:', e.message));
 }
 
-// ── Sessions ────────────────────────────────────────────────────────────────
+function buildSessionSummary(sessionId) {
+  const msgs = getMessages(sessionId);
+  return msgs
+    .map((m) => `**${m.role === 'user' ? 'Vladimir' : 'Jarvis'}:** ${m.content}`)
+    .join('\n\n');
+}
+
+// ── Sessions ──────────────────────────────────────────────────────────────────
 
 app.get('/api/sessions', (req, res) => {
   res.json(listSessions(50));
@@ -97,7 +118,7 @@ app.delete('/api/sessions/:id', (req, res) => {
   res.json({ ok: true });
 });
 
-// ── Vault ───────────────────────────────────────────────────────────────────
+// ── Vault ─────────────────────────────────────────────────────────────────────
 
 app.get('/api/vault', async (req, res) => {
   try {
@@ -111,7 +132,6 @@ app.get('/api/vault', async (req, res) => {
 app.get('/api/vault/read', async (req, res) => {
   const { path } = req.query;
   if (!path) return res.status(400).json({ error: 'path required' });
-  // Prevent path traversal
   if (path.includes('..')) return res.status(400).json({ error: 'invalid path' });
   try {
     const content = await readNote(path);
@@ -153,7 +173,7 @@ app.post('/api/vault/sync', async (req, res) => {
   }
 });
 
-// ── Boot ────────────────────────────────────────────────────────────────────
+// ── Boot ──────────────────────────────────────────────────────────────────────
 
 await initVault();
 app.listen(PORT, () => console.log(`Jarvis API running on :${PORT}`));

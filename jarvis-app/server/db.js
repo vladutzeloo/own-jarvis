@@ -11,6 +11,7 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS sessions (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
+    platform TEXT NOT NULL DEFAULT 'unknown',
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL
   );
@@ -24,12 +25,19 @@ db.exec(`
   );
 `);
 
-export function createSession(id, title) {
+// Add platform column to existing DBs that predate this schema
+try {
+  db.exec(`ALTER TABLE sessions ADD COLUMN platform TEXT NOT NULL DEFAULT 'unknown'`);
+} catch {
+  // Column already exists — ignore
+}
+
+export function createSession(id, title, platform = 'unknown') {
   const now = Date.now();
   db.prepare(
-    'INSERT INTO sessions (id, title, created_at, updated_at) VALUES (?, ?, ?, ?)'
-  ).run(id, title, now, now);
-  return { id, title, created_at: now, updated_at: now };
+    'INSERT INTO sessions (id, title, platform, created_at, updated_at) VALUES (?, ?, ?, ?, ?)'
+  ).run(id, title, platform, now, now);
+  return { id, title, platform, created_at: now, updated_at: now };
 }
 
 export function getSession(id) {
@@ -42,13 +50,13 @@ export function listSessions(limit = 50) {
     .all(limit);
 }
 
-export function touchSession(id, title) {
+export function touchSession(id, title, platform = 'unknown') {
   const now = Date.now();
   const existing = getSession(id);
   if (existing) {
-    db.prepare('UPDATE sessions SET updated_at = ? WHERE id = ?').run(now, id);
+    db.prepare('UPDATE sessions SET updated_at = ?, platform = ? WHERE id = ?').run(now, platform, id);
   } else {
-    createSession(id, title || 'Untitled');
+    createSession(id, title || 'Untitled', platform);
   }
 }
 
@@ -63,6 +71,12 @@ export function getMessages(sessionId) {
   return db
     .prepare('SELECT role, content, created_at FROM messages WHERE session_id = ? ORDER BY created_at ASC')
     .all(sessionId);
+}
+
+export function countMessages(sessionId) {
+  return db
+    .prepare('SELECT COUNT(*) as cnt FROM messages WHERE session_id = ?')
+    .get(sessionId).cnt;
 }
 
 export function deleteSession(id) {

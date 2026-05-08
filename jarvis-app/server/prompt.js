@@ -1,6 +1,6 @@
 import { readAllNotes } from './vault.js';
 
-// Priority folders to include (in order). Others are skipped to keep context tight.
+// Priority folders/files to include first (checked against vault-relative path)
 const PRIORITY_PATHS = [
   '01_Identity',
   '06_Memory/facts.md',
@@ -12,7 +12,6 @@ const PRIORITY_PATHS = [
 
 const MAX_CHARS = 24000; // ~6k tokens, leaves room for conversation history
 
-// Build the Jarvis system prompt dynamically from vault content
 export async function buildSystemPrompt() {
   let notes;
   try {
@@ -21,17 +20,31 @@ export async function buildSystemPrompt() {
     return FALLBACK_PROMPT;
   }
 
-  // Sort notes by priority order
   const sorted = sortByPriority(notes);
 
-  let context = '';
-  for (const { path, content } of sorted) {
-    const block = `\n\n--- ${path} ---\n${content.trim()}`;
-    if (context.length + block.length > MAX_CHARS) break;
-    context += block;
+  // Group by vault label so context is clearly sectioned
+  const primary = sorted.filter((n) => n.vault !== 'secondary');
+  const secondary = sorted.filter((n) => n.vault === 'secondary');
+
+  let context = buildSection('Primary Vault (own-jarvis)', primary, MAX_CHARS);
+  if (secondary.length) {
+    const remaining = MAX_CHARS - context.length;
+    if (remaining > 500) {
+      context += buildSection('Secondary Vault', secondary, remaining);
+    }
   }
 
-  return `${BASE_PROMPT}\n\n## Your Knowledge Base (Obsidian Vault)\n${context}`;
+  return `${BASE_PROMPT}\n\n## Your Knowledge Base\n${context}`;
+}
+
+function buildSection(label, notes, maxChars) {
+  let section = `\n\n### ${label}\n`;
+  for (const { path, content } of notes) {
+    const block = `\n--- ${path} ---\n${content.trim()}\n`;
+    if (section.length + block.length > maxChars) break;
+    section += block;
+  }
+  return section;
 }
 
 function sortByPriority(notes) {
@@ -51,15 +64,16 @@ const BASE_PROMPT = `You are Jarvis, Vladimir's personal AI assistant.
 - Never use emojis unless Vladimir uses them first.
 - Output markdown. Use headers, bullets, and code blocks where helpful.
 - When you don't know something, say so clearly instead of guessing.
-- You have full context about Vladimir's identity, projects, preferences, and history from his Obsidian vault below.
+- You have full context about Vladimir's identity, projects, preferences, and history from his Obsidian vault(s) below.
 - Today's date: ${new Date().toISOString().slice(0, 10)}
 
-## What you can tell Vladimir you can do
-- Answer questions using his vault as context
+## What you can do
+- Answer questions using the vault as context
 - Help with VMES project (code, strategy, decisions)
-- Remember things (ask him to say "save this" and you'll suggest writing an episode)
-- Read and update his vault notes (via the web app's Vault tab)`;
+- Remember things — say "save this" or "remember this" to write an episode to the vault
+- Read and update vault notes (via the Vault tab)
+- Sessions sync between phone and jarvis.exe — continue a conversation on either device`;
 
 const FALLBACK_PROMPT = `${BASE_PROMPT}
 
-(Vault not yet loaded — answer from general knowledge.)`;
+(Vault not yet loaded — answering from general knowledge.)`;

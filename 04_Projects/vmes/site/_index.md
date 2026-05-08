@@ -34,6 +34,8 @@ The public face of VMES. Currently a single-page React/Vite SPA.
 
 ## SEO baseline
 
+Quick-look list. The full audit, gap analysis, and action plan live in [[04_Projects/vmes/marketing/seo]].
+
 - ✅ Meta description present
 - ✅ OpenGraph tags present
 - ✅ Sitemap exposed

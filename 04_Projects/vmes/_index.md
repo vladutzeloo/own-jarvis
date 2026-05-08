@@ -34,9 +34,10 @@ VMES is the largest single body of Vladimir's work. Anything that touches the pr
 
 | Folder | Contents |
 |---|---|
-| `site/` | Marketing site notes — pages, copy, SEO, metrics |
+| `site/` | Marketing site technical state — pages, snapshot, monitoring log |
 | `crm/` | CRM notes — features, customers, data model, ops |
 | `repo/` | Repo-related — branches, releases, infra, deploy notes |
+| `marketing/` | SEO, paid acquisition, scraping/competitive intel — see [[04_Projects/vmes/marketing/_index]] |
 | `integrations/` | The four integration tracks with the vault — see [[04_Projects/vmes/integrations/_index]] |
 | `decisions/` | Project-local decision log (cross-link to `06_Memory/decisions/` for cross-cutting ones) |
 | `customers/` | Per-customer notes if/when relevant |
@@ -82,6 +83,7 @@ Project folder created. Both surfaces fetched — vmes.ro live, crm.vmes.ro cert
 
 ## Related
 
+- [[04_Projects/vmes/marketing/_index]] — SEO, ads, scraping
 - [[02_Capabilities/connectors/README]] — connector strategy
 - [[02_Capabilities/skills/schedule]] — for monitoring jobs
 - [[06_Memory/decisions/README]] — cross-cutting decision log

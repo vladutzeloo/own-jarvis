@@ -25,7 +25,7 @@ The bootstrap script `init-repo.ps1` is idempotent: safe to re-run on an already
 
 ## Branches
 
-Branch names take the form `claude/<short-purpose>-<random6>` for any work Jarvis initiates — e.g. `claude/review-repo-bugs-n9L0B`. The random suffix avoids collisions when multiple sessions run concurrently.
+Branch names take the form `claude/<short-purpose>-<random>` for any work Jarvis initiates — e.g. `claude/review-repo-bugs-n9L0B`. The random suffix is whatever the harness produces (currently a 5-character base62 token); the spec doesn't pin a length. The random suffix avoids collisions when multiple sessions run concurrently.
 
 For human-driven work, use `<initials>/<purpose>` or topic branches; the `claude/` prefix is reserved so Vladimir can grep for AI-authored branches at a glance.
 

@@ -38,7 +38,7 @@ Three categories: **must-fix**, **should-fix**, **strategic**. The first two are
 
 ### Must-fix
 
-1. **Pre-rendered or server-rendered HTML.** Googlebot has rendered JS for years, but a SPA that returns an empty `<div id="root">` still costs indexing latency, fails Core Web Vitals on first paint, and is effectively invisible to non-rendering crawlers — Bing, DuckDuckGo, LinkedIn previews, Slack/X unfurlers. Pre-render the home page (`vike`, `vite-plugin-prerender`, `react-snap`), switch to a meta-framework (Astro, Next.js, Remix), or add a build-time static export.
+1. **Pre-rendered or server-rendered HTML.** Googlebot has rendered JS for years, but a SPA that returns an empty `<div id="root">` still costs indexing latency, degrades Core Web Vitals (specifically LCP — first paint of the empty shell can be fast, but the contentful paint waits on JS hydration), and is effectively invisible to non-rendering crawlers like social media unfurlers — LinkedIn, Slack, and X. Pre-render the home page (`vike`, `vite-plugin-prerender`, `react-snap`), switch to a meta-framework (Astro, Next.js, Remix), or add a build-time static export.
 2. **JSON-LD `Organization` and `SoftwareApplication` schemas in the static HTML.** Both are well-supported by Google rich results. Without these, Google has to infer everything about VMES from prose. Inject them server-side or in `index.html` directly.
 3. **OG image verified and at recommended dimensions** (1200×630, ≤ 5 MB, JPEG/PNG). The current OG presence flag in the baseline does not include image confirmation.
 

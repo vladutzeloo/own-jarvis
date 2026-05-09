@@ -32,7 +32,7 @@ export function Dashboard() {
     <div className="space-y-10">
       <header className="space-y-3">
         <div className="badge">
-          <Sparkles size={11} className="text-accent" />
+          <Sparkles size={11} className="text-accent" aria-hidden="true" />
           <span>Online &middot; {manifest.total} notes indexed</span>
         </div>
         <h1 className="font-sans text-5xl font-light tracking-tight text-fg">
@@ -52,13 +52,14 @@ export function Dashboard() {
           <Link
             key={label}
             to={to}
-            className="card card-hover group p-5"
+            className="card card-hover group p-5 outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <div className="flex items-start justify-between">
-              <Icon size={16} className="text-fg-subtle group-hover:text-primary" />
+              <Icon size={16} className="text-fg-subtle group-hover:text-primary" aria-hidden="true" />
               <ArrowUpRight
                 size={14}
                 className="text-fg-subtle transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                aria-hidden="true"
               />
             </div>
             <div className="mt-6 stat-value">{value}</div>

@@ -16,7 +16,7 @@ export function Inbox() {
       {items.length === 0 ? (
         <div className="card flex flex-col items-center justify-center gap-3 py-16 text-center">
           <div className="grid h-12 w-12 place-items-center rounded-full border border-border bg-bg-subtle">
-            <InboxIcon size={20} className="text-fg-subtle" />
+            <InboxIcon size={20} className="text-fg-subtle" aria-hidden="true" />
           </div>
           <p className="font-mono text-sm text-fg-muted">Inbox is empty.</p>
           <p className="font-mono text-[11px] text-fg-subtle">

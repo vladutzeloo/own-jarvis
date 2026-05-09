@@ -21,6 +21,12 @@ export function Layout() {
   const generated = new Date(manifest.generatedAt);
   return (
     <div className="grid min-h-screen grid-cols-[260px_1fr]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-bg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-fg focus:ring-2 focus:ring-primary focus:outline-none"
+      >
+        Skip to main content
+      </a>
       <aside className="border-r border-border bg-bg-elevated/40 backdrop-blur-sm">
         <div className="sticky top-0 flex h-screen flex-col">
           <div className="flex items-center gap-3 border-b border-border px-6 py-5">
@@ -45,14 +51,14 @@ export function Layout() {
                     end={end}
                     className={({ isActive }) =>
                       cn(
-                        "group flex items-center gap-3 rounded-md px-3 py-2 font-medium transition-colors",
+                        "group flex items-center gap-3 rounded-md px-3 py-2 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary",
                         "text-fg-muted hover:bg-bg-subtle hover:text-fg",
                         isActive &&
                           "bg-bg-subtle text-fg ring-1 ring-primary/40 shadow-glow"
                       )
                     }
                   >
-                    <Icon size={16} className="shrink-0" aria-hidden />
+                    <Icon size={16} className="shrink-0" aria-hidden="true" />
                     <span className="text-sm">{label}</span>
                   </NavLink>
                 </li>
@@ -62,7 +68,7 @@ export function Layout() {
 
           <div className="border-t border-border px-6 py-4">
             <div className="flex items-center gap-2 font-mono text-[11px] text-fg-subtle">
-              <Activity size={12} className="text-success" />
+              <Activity size={12} className="text-success" aria-hidden="true" />
               <span className="uppercase tracking-wider">Vault online</span>
             </div>
             <div className="mt-1 font-mono text-[11px] text-fg-subtle">
@@ -73,7 +79,7 @@ export function Layout() {
         </div>
       </aside>
 
-      <main className="min-w-0">
+      <main id="main-content" className="min-w-0" tabIndex={-1}>
         <div className="mx-auto max-w-6xl px-8 py-10">
           <Outlet />
         </div>

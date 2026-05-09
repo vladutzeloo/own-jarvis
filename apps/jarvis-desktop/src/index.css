@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: theme("fontFamily.sans");
+    font-feature-settings: "ss01", "cv11";
+    background: radial-gradient(
+        circle at 20% -10%,
+        rgba(59, 130, 246, 0.12) 0%,
+        transparent 45%
+      ),
+      radial-gradient(circle at 110% 20%, rgba(217, 119, 6, 0.08) 0%, transparent 40%),
+      theme("colors.bg.DEFAULT");
+  }
+
+  ::selection {
+    background: rgba(59, 130, 246, 0.35);
+    color: theme("colors.fg.DEFAULT");
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-bg-elevated/70 backdrop-blur-sm shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset];
+  }
+  .card-hover {
+    @apply transition-colors duration-200 hover:bg-bg-elevated hover:border-border-strong;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md border border-border bg-bg-subtle px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide text-fg-muted;
+  }
+  .stat-value {
+    @apply font-mono text-3xl font-semibold tracking-tight text-fg;
+  }
+  .stat-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-fg-subtle;
+  }
+}

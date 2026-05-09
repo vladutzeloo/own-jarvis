@@ -1,0 +1,13 @@
+node_modules
+dist
+.vite
+*.log
+
+# tsc -b composite-build artifacts
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Manifest is generated; commit it so the app can be opened without running a build first.
+# Comment the next line out if you'd rather always regenerate.
+# src/data/manifest.json

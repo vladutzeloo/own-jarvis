@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-09T00:20:06.983Z",
+  "generatedAt": "2026-05-09T00:24:38.121Z",
   "vaultRoot": "own-jarvis",
   "counts": {
     "99_Templates": 9,
     "00_Meta": 4,
     "01_Identity": 5,
-    "02_Capabilities": 30,
+    "02_Capabilities": 31,
     "03_Workflows": 14,
     "04_Projects": 15,
     "05_Knowledge": 4,
@@ -13,7 +13,7 @@
     "07_Inbox": 1,
     "_root": 2
   },
-  "total": 89,
+  "total": 90,
   "notes": [
     {
       "path": "99_Templates/daily-note.md",
@@ -624,6 +624,25 @@
       "aliases": [],
       "excerpt": "# Skill: skill-creator  Create, edit, evaluate, and optimize skills.",
       "wordCount": 232
+    },
+    {
+      "path": "02_Capabilities/skills/ui-ux-pro-max.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/ui-ux-pro-max",
+      "title": "UI/UX Pro Max — Design Intelligence",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "ui",
+        "ux",
+        "design"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# UI/UX Pro Max  Project-scoped Claude skill that provides design intelligence for web and mobile UI work — 67 styles, 161 colour palettes, 57 font pairings, 161 product types with reasoning rules, 99 UX guidelines, and 25 chart types acros",
+      "wordCount": 572
     },
     {
       "path": "02_Capabilities/skills/xlsx.md",

@@ -43,8 +43,6 @@ export function notesWithTag(tag: string): VaultNote[] {
 }
 
 export function recentNotes(limit = 8): VaultNote[] {
-  return [...manifest.notes]
-    .filter((n) => n.updated)
-    .sort((a, b) => (b.updated ?? "").localeCompare(a.updated ?? ""))
-    .slice(0, limit);
+  // Manifest is already sorted by `updated` desc in scripts/build-manifest.mjs.
+  return manifest.notes.filter((n) => n.updated).slice(0, limit);
 }

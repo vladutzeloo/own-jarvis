@@ -10,7 +10,14 @@ export function Projects() {
     const s = p.status ?? "unspecified";
     (byStatus[s] ??= []).push(p);
   }
-  const order = ["active", "paused", "done", "archived", "unspecified"];
+  // Preferred order first; any other statuses found in the data fall in after,
+  // sorted alphabetically. Anything new (e.g. "draft", "backlog") is rendered,
+  // never silently hidden.
+  const PREFERRED = ["active", "paused", "done", "archived", "unspecified"];
+  const extra = Object.keys(byStatus)
+    .filter((s) => !PREFERRED.includes(s))
+    .sort();
+  const order = [...PREFERRED, ...extra];
 
   return (
     <div className="space-y-10">

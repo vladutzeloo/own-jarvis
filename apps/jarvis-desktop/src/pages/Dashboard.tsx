@@ -19,7 +19,7 @@ export function Dashboard() {
   const stats = [
     {
       label: "Active projects",
-      value: projects.filter((p) => p.status === "active").length || projects.length,
+      value: projects.filter((p) => p.status === "active").length,
       to: "/projects",
       Icon: FolderGit2,
     },

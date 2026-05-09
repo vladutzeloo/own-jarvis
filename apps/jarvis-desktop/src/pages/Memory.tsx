@@ -1,19 +1,31 @@
 import { notesIn } from "@/lib/utils";
 
+type Bucket = "decisions" | "learnings" | "episodes" | "other";
+
+const BUCKET_BY_TYPE: Record<string, Bucket> = {
+  decision: "decisions",
+  learning: "learnings",
+  episode: "episodes",
+};
+
 export function Memory() {
   const items = notesIn("06_Memory");
-  const decisions = items.filter((n) => n.type === "decision");
-  const learnings = items.filter((n) => n.type === "learning");
-  const episodes = items.filter((n) => n.type === "episode");
-  const other = items.filter(
-    (n) => !["decision", "learning", "episode"].includes(n.type ?? "")
-  );
+  const buckets: Record<Bucket, typeof items> = {
+    decisions: [],
+    learnings: [],
+    episodes: [],
+    other: [],
+  };
+  for (const n of items) {
+    const bucket = BUCKET_BY_TYPE[n.type ?? ""] ?? "other";
+    buckets[bucket].push(n);
+  }
 
   const sections = [
-    { title: "Decisions", items: decisions, accent: "text-primary" },
-    { title: "Learnings", items: learnings, accent: "text-accent" },
-    { title: "Episodes", items: episodes, accent: "text-success" },
-    { title: "Other", items: other, accent: "text-fg-muted" },
+    { title: "Decisions", items: buckets.decisions, accent: "text-primary" },
+    { title: "Learnings", items: buckets.learnings, accent: "text-accent" },
+    { title: "Episodes", items: buckets.episodes, accent: "text-success" },
+    { title: "Other", items: buckets.other, accent: "text-fg-muted" },
   ];
 
   return (

@@ -18,3 +18,14 @@ desktop.ini
 .env
 .env.local
 .env.*.local
+
+# Node / build artifacts (apps/*)
+node_modules/
+**/node_modules/
+**/dist/
+**/.vite/
+*.log
+
+# Python bytecode (skills sometimes ship .py scripts)
+__pycache__/
+*.pyc

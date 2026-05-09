@@ -1,0 +1,1555 @@
+{
+  "generatedAt": "2026-05-09T00:24:38.121Z",
+  "vaultRoot": "own-jarvis",
+  "counts": {
+    "99_Templates": 9,
+    "00_Meta": 4,
+    "01_Identity": 5,
+    "02_Capabilities": 31,
+    "03_Workflows": 14,
+    "04_Projects": 15,
+    "05_Knowledge": 4,
+    "06_Memory": 5,
+    "07_Inbox": 1,
+    "_root": 2
+  },
+  "total": 90,
+  "notes": [
+    {
+      "path": "99_Templates/daily-note.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/daily-note",
+      "title": "Daily Note — YYYY-MM-DD",
+      "type": "episode",
+      "tags": [
+        "memory",
+        "episode",
+        "daily"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Daily Note — YYYY-MM-DD  ## Today's three",
+      "wordCount": 61
+    },
+    {
+      "path": "99_Templates/decision.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/decision",
+      "title": "Decision — TITLE — YYYY-MM-DD",
+      "type": "decision",
+      "tags": [
+        "memory",
+        "decision"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Decision — TITLE — YYYY-MM-DD  ## What was decided",
+      "wordCount": 103
+    },
+    {
+      "path": "99_Templates/knowledge-note.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/knowledge-note",
+      "title": "TOPIC",
+      "type": "knowledge",
+      "tags": [
+        "knowledge",
+        "domain/_DOMAIN_"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# TOPIC  ## Summary",
+      "wordCount": 51
+    },
+    {
+      "path": "99_Templates/learning.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/learning",
+      "title": "Learning — TITLE — YYYY-MM-DD",
+      "type": "learning",
+      "tags": [
+        "memory",
+        "learning"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Learning — TITLE — YYYY-MM-DD  ## What I learned",
+      "wordCount": 53
+    },
+    {
+      "path": "99_Templates/meeting-notes.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/meeting-notes",
+      "title": "Meeting — TOPIC — YYYY-MM-DD",
+      "type": "episode",
+      "tags": [
+        "memory",
+        "episode",
+        "meeting"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Meeting — TOPIC — YYYY-MM-DD  **Attendees:** _names_",
+      "wordCount": 84
+    },
+    {
+      "path": "99_Templates/project.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/project",
+      "title": "Project — NAME",
+      "type": "project",
+      "tags": [
+        "project",
+        "active"
+      ],
+      "status": "active",
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Project — NAME  ## Outcome",
+      "wordCount": 139
+    },
+    {
+      "path": "99_Templates/research-brief.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/research-brief",
+      "title": "Research Brief — TOPIC",
+      "type": "knowledge",
+      "tags": [
+        "knowledge",
+        "research"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Research Brief — TOPIC  ## Question",
+      "wordCount": 76
+    },
+    {
+      "path": "99_Templates/weekly-review.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/weekly-review",
+      "title": "Weekly Review — Week of YYYY-MM-DD",
+      "type": "episode",
+      "tags": [
+        "memory",
+        "episode",
+        "weekly-review"
+      ],
+      "status": null,
+      "updated": "YYYY-MM-DD",
+      "aliases": [],
+      "excerpt": "# Weekly Review — Week of YYYY-MM-DD  ## What I said I'd do",
+      "wordCount": 105
+    },
+    {
+      "path": "00_Meta/conventions.md",
+      "folder": "00_Meta",
+      "slug": "00_Meta/conventions",
+      "title": "Vault Conventions",
+      "type": "spec",
+      "tags": [
+        "meta",
+        "conventions"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Vault Conventions  Conventions exist so any file can be read, linked, or rewritten without surprises. Follow them strictly.",
+      "wordCount": 420
+    },
+    {
+      "path": "00_Meta/git-conventions.md",
+      "folder": "00_Meta",
+      "slug": "00_Meta/git-conventions",
+      "title": "Git & Repo Conventions",
+      "type": "spec",
+      "tags": [
+        "meta",
+        "conventions",
+        "git",
+        "repo"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Git & Repo Conventions  The vault is a git repository at `github.com/vladutzeloo/own-jarvis`. This file is the operating manual for any session — Jarvis or human — that touches git or GitHub for this repo.",
+      "wordCount": 620
+    },
+    {
+      "path": "00_Meta/index.md",
+      "folder": "00_Meta",
+      "slug": "00_Meta/index",
+      "title": "Master Index (MOC of MOCs)",
+      "type": "moc",
+      "tags": [
+        "meta",
+        "moc",
+        "index"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Master Index  The single map that points at every other map. When in doubt, start here.",
+      "wordCount": 216
+    },
+    {
+      "path": "00_Meta/vault-architecture.md",
+      "folder": "00_Meta",
+      "slug": "00_Meta/vault-architecture",
+      "title": "Vault Architecture",
+      "type": "spec",
+      "tags": [
+        "meta",
+        "architecture"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Vault Architecture  The vault is organized as a layered system, not a flat list of folders. Each layer answers one question Jarvis asks before acting.",
+      "wordCount": 571
+    },
+    {
+      "path": "01_Identity/about.md",
+      "folder": "01_Identity",
+      "slug": "01_Identity/about",
+      "title": "About Vladimir",
+      "type": "identity",
+      "tags": [
+        "identity",
+        "profile"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# About Vladimir  > **Jarvis: read this first.** Every recommendation should reflect this context. If something here is wrong, ask before assuming.",
+      "wordCount": 255
+    },
+    {
+      "path": "01_Identity/context.md",
+      "folder": "01_Identity",
+      "slug": "01_Identity/context",
+      "title": "Current Context",
+      "type": "identity",
+      "tags": [
+        "identity",
+        "context"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Current Context  Short-lived facts about Vladimir's current life situation. Unlike [[01_Identity/about]], this file is expected to drift — review monthly.",
+      "wordCount": 118
+    },
+    {
+      "path": "01_Identity/goals.md",
+      "folder": "01_Identity",
+      "slug": "01_Identity/goals",
+      "title": "Goals",
+      "type": "identity",
+      "tags": [
+        "identity",
+        "goals"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Goals  Goals at three time horizons. Jarvis uses these to prioritize suggestions and notice when a request connects to a larger arc.",
+      "wordCount": 149
+    },
+    {
+      "path": "01_Identity/preferences.md",
+      "folder": "01_Identity",
+      "slug": "01_Identity/preferences",
+      "title": "Preferences",
+      "type": "identity",
+      "tags": [
+        "identity",
+        "preferences"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Preferences  How Jarvis should communicate, format, and deliver work for Vladimir.",
+      "wordCount": 239
+    },
+    {
+      "path": "01_Identity/values.md",
+      "folder": "01_Identity",
+      "slug": "01_Identity/values",
+      "title": "Values",
+      "type": "identity",
+      "tags": [
+        "identity",
+        "values"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Values  What Vladimir uses to weigh tradeoffs when goals conflict. These are deliberately fewer than goals — three to five durable principles, not a virtues list.",
+      "wordCount": 149
+    },
+    {
+      "path": "02_Capabilities/README.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/README",
+      "title": "Capabilities — Overview",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Capabilities  The set of things Jarvis can actually do, organized by mechanism. Before recommending an approach, check what's on the menu.",
+      "wordCount": 354
+    },
+    {
+      "path": "02_Capabilities/agents/README.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/agents/README",
+      "title": "Agents — Sub-Claudes",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "agent",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Agents  Sub-Claudes Jarvis can dispatch for parallel, isolated, or specialized work. Each one is its own context window — fresh memory, no awareness of the parent conversation.",
+      "wordCount": 346
+    },
+    {
+      "path": "02_Capabilities/agents/claude-code-guide.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/agents/claude-code-guide",
+      "title": "Agent — Claude Code Guide",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "agent",
+        "claude-code"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Agent: Claude Code Guide  Specialized agent for questions about Claude Code (CLI), Claude Agent SDK, and Claude API.",
+      "wordCount": 116
+    },
+    {
+      "path": "02_Capabilities/agents/explore.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/agents/explore",
+      "title": "Agent — Explore",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "agent",
+        "search"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Agent: Explore  Fast read-only search agent. Locates code, finds files by pattern, greps for symbols.",
+      "wordCount": 141
+    },
+    {
+      "path": "02_Capabilities/agents/general-purpose.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/agents/general-purpose",
+      "title": "Agent — General Purpose",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "agent",
+        "research"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Agent: General Purpose  The default workhorse — multi-step research, complex searches, broad investigations.",
+      "wordCount": 115
+    },
+    {
+      "path": "02_Capabilities/agents/plan.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/agents/plan",
+      "title": "Agent — Plan",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "agent",
+        "planning"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Agent: Plan  Software architect agent. Designs implementation plans, identifies critical files, considers architectural trade-offs.",
+      "wordCount": 131
+    },
+    {
+      "path": "02_Capabilities/connectors/README.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/connectors/README",
+      "title": "Connectors — MCP Servers",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "connector",
+        "mcp",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Connectors  MCP (Model Context Protocol) servers that expose third-party services as tools. Slack, Gmail, Calendar, Linear, Asana, Notion, etc.",
+      "wordCount": 458
+    },
+    {
+      "path": "02_Capabilities/integrations/_index.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/integrations/_index",
+      "title": "Integrations",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "integration",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Integrations  External APIs Jarvis can call directly from a script, agent, or shell — distinct from [[02_Capabilities/connectors/README|connectors]] (MCP servers wired into Cowork) and [[02_Capabilities/tools/README|tools]] (atomic primit",
+      "wordCount": 228
+    },
+    {
+      "path": "02_Capabilities/integrations/jules.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/integrations/jules",
+      "title": "Google Jules API (jules.google)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "integration",
+        "jules",
+        "coding-agent",
+        "google"
+      ],
+      "status": "stub",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Google Jules API  Programmatic access to [Jules](https://jules.google/), Google's autonomous coding agent. Jarvis dispatches a coding task (repo + prompt + branch); Jules works on it asynchronously and returns a PR or diff. The right tool",
+      "wordCount": 710
+    },
+    {
+      "path": "02_Capabilities/integrations/nvidia.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/integrations/nvidia",
+      "title": "NVIDIA API (build.nvidia.com)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "integration",
+        "nvidia",
+        "llm",
+        "inference"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# NVIDIA API  NVIDIA's hosted inference catalog — a single OpenAI-compatible endpoint that fronts the NIM model catalog (Llama, Mixtral, Nemotron, embeddings, vision, ASR, TTS). Used when Jarvis needs an NVIDIA-served model rather than a Cl",
+      "wordCount": 581
+    },
+    {
+      "path": "02_Capabilities/runtime.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/runtime",
+      "title": "Jarvis Runtime",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "runtime",
+        "platform",
+        "meta"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Jarvis Runtime  Skills, tools, connectors, and agents describe **what Jarvis can do**. This file describes **the substrate all of that runs on** — which Claude product is hosting the session, which model is answering, which integrations a",
+      "wordCount": 986
+    },
+    {
+      "path": "02_Capabilities/skills/README.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/README",
+      "title": "Skills — Registry",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "skill",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skills  Skills are pre-packaged best-practice instructions that Jarvis loads on demand. Each skill is a `SKILL.md` file in `~/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/.../skills/<name>/`. When triggered, Jarvis reads",
+      "wordCount": 309
+    },
+    {
+      "path": "02_Capabilities/skills/consolidate-memory.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/consolidate-memory",
+      "title": "Skill — consolidate-memory",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "memory"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: consolidate-memory  Reflective pass over memory files — merge duplicates, fix stale facts, prune the index.",
+      "wordCount": 89
+    },
+    {
+      "path": "02_Capabilities/skills/docx.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/docx",
+      "title": "Skill — docx (Word documents)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "docx",
+        "word"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: docx  Create, read, and edit Microsoft Word documents (.docx) with professional formatting.",
+      "wordCount": 221
+    },
+    {
+      "path": "02_Capabilities/skills/pdf.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/pdf",
+      "title": "Skill — pdf (PDF Processing)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "pdf"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: pdf  Comprehensive PDF manipulation — extract text/tables, create new PDFs, merge/split, fill forms, OCR scanned PDFs.",
+      "wordCount": 245
+    },
+    {
+      "path": "02_Capabilities/skills/pptx.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/pptx",
+      "title": "Skill — pptx (Presentations)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "pptx",
+        "powerpoint",
+        "presentation"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: pptx  Create, read, and edit PowerPoint presentations and slide decks.",
+      "wordCount": 215
+    },
+    {
+      "path": "02_Capabilities/skills/schedule.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/schedule",
+      "title": "Skill — schedule (Scheduled Tasks)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "schedule",
+        "automation"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: schedule  Create scheduled tasks that run on demand or automatically on an interval.",
+      "wordCount": 205
+    },
+    {
+      "path": "02_Capabilities/skills/setup-cowork.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/setup-cowork",
+      "title": "Skill — setup-cowork",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "setup"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: setup-cowork  Guided Cowork setup — install role-matched plugins, connect tools, try a skill.",
+      "wordCount": 72
+    },
+    {
+      "path": "02_Capabilities/skills/skill-creator.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/skill-creator",
+      "title": "Skill — skill-creator (Build New Skills)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "meta"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: skill-creator  Create, edit, evaluate, and optimize skills.",
+      "wordCount": 232
+    },
+    {
+      "path": "02_Capabilities/skills/ui-ux-pro-max.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/ui-ux-pro-max",
+      "title": "UI/UX Pro Max — Design Intelligence",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "ui",
+        "ux",
+        "design"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# UI/UX Pro Max  Project-scoped Claude skill that provides design intelligence for web and mobile UI work — 67 styles, 161 colour palettes, 57 font pairings, 161 product types with reasoning rules, 99 UX guidelines, and 25 chart types acros",
+      "wordCount": 572
+    },
+    {
+      "path": "02_Capabilities/skills/xlsx.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/skills/xlsx",
+      "title": "Skill — xlsx (Spreadsheets)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "skill",
+        "xlsx",
+        "excel",
+        "spreadsheet"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Skill: xlsx  Create, read, edit, and clean Excel spreadsheets and CSV/TSV files. Supports formulas, formatting, charts, and data analysis.",
+      "wordCount": 234
+    },
+    {
+      "path": "02_Capabilities/tools/README.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/README",
+      "title": "Tools — Built-in Primitives",
+      "type": "moc",
+      "tags": [
+        "capability",
+        "tool",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Tools  The atomic primitives Jarvis has at all times. Skills compose these; connectors wrap external services; agents run in their own process. Tools are the floor.",
+      "wordCount": 294
+    },
+    {
+      "path": "02_Capabilities/tools/artifacts.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/artifacts",
+      "title": "Tool — Artifacts (Live HTML Views)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "artifact"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Artifacts  Persistent, self-contained HTML pages that pull fresh data from connectors each time they're opened. Saved across sessions.",
+      "wordCount": 306
+    },
+    {
+      "path": "02_Capabilities/tools/claude-in-chrome.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/claude-in-chrome",
+      "title": "Tool — Claude in Chrome (Browser Automation)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "browser",
+        "chrome"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Claude in Chrome  DOM-aware browser automation for any web app without a dedicated MCP. Much faster and more reliable than clicking pixels.",
+      "wordCount": 209
+    },
+    {
+      "path": "02_Capabilities/tools/computer-use.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/computer-use",
+      "title": "Tool — Computer Use",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "computer-use",
+        "desktop"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Computer Use  Take screenshots of Vladimir's desktop and control it with mouse, keyboard, and scroll.",
+      "wordCount": 298
+    },
+    {
+      "path": "02_Capabilities/tools/file-system.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/file-system",
+      "title": "Tool — File System (Read, Write, Edit)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "filesystem"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# File System  Three atomic file tools: `Read`, `Write`, `Edit`. They operate on Vladimir's actual disk, mediated by the Cowork harness.",
+      "wordCount": 315
+    },
+    {
+      "path": "02_Capabilities/tools/scheduled-tasks.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/scheduled-tasks",
+      "title": "Tool — Scheduled Tasks",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "automation",
+        "schedule"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Scheduled Tasks  Cron-like recurring runs that fire as fresh Cowork sessions. Each scheduled task is a self-contained prompt that runs without Vladimir present.",
+      "wordCount": 202
+    },
+    {
+      "path": "02_Capabilities/tools/shell-bash.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/shell-bash",
+      "title": "Tool — Shell (Bash)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "shell",
+        "bash"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Shell (Bash)  Runs shell commands in an isolated Ubuntu 22 sandbox with Python, Node, and common CLI tools preinstalled. Allowlisted network access.",
+      "wordCount": 336
+    },
+    {
+      "path": "02_Capabilities/tools/task-list.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/task-list",
+      "title": "Tool — Task List (TodoWrite)",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "todo",
+        "planning"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Task List  In-session task tracker. Renders as a widget in Cowork — Vladimir sees progress live.",
+      "wordCount": 175
+    },
+    {
+      "path": "02_Capabilities/tools/web-fetch.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/web-fetch",
+      "title": "Tool — Web Fetch",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "web"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Web Fetch  Pull a specific URL and parse its content.",
+      "wordCount": 169
+    },
+    {
+      "path": "02_Capabilities/tools/web-search.md",
+      "folder": "02_Capabilities",
+      "slug": "02_Capabilities/tools/web-search",
+      "title": "Tool — Web Search",
+      "type": "capability",
+      "tags": [
+        "capability",
+        "tool",
+        "web"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Web Search  Search the live web for current information.",
+      "wordCount": 233
+    },
+    {
+      "path": "03_Workflows/README.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/README",
+      "title": "Workflows — Recipe Library",
+      "type": "moc",
+      "tags": [
+        "workflow",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Workflows  Recipes for tasks that get done more than once. Each workflow is a step-by-step playbook with judgment calls noted explicitly. When Vladimir asks for one of these, Jarvis follows the recipe rather than reinventing.",
+      "wordCount": 234
+    },
+    {
+      "path": "03_Workflows/communication/draft-email.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/communication/draft-email",
+      "title": "Workflow — Draft Email",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "communication",
+        "email"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Draft Email  Write an email in Vladimir's voice. Not for sending — for drafting that he'll review and send himself.",
+      "wordCount": 196
+    },
+    {
+      "path": "03_Workflows/communication/summarize-thread.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/communication/summarize-thread",
+      "title": "Workflow — Summarize Thread",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "communication",
+        "summary"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Summarize Thread  Distill a long email or Slack thread into something readable.",
+      "wordCount": 169
+    },
+    {
+      "path": "03_Workflows/development/code-review.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/development/code-review",
+      "title": "Workflow — Code Review",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "development",
+        "review"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Code Review  Review a PR or diff. The goal is to catch real problems, not produce a long comment list.",
+      "wordCount": 223
+    },
+    {
+      "path": "03_Workflows/development/debug-session.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/development/debug-session",
+      "title": "Workflow — Debug Session",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "development",
+        "debugging"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Debug Session  Systematic debugging. The goal is to find the root cause, not just make the symptom go away.",
+      "wordCount": 229
+    },
+    {
+      "path": "03_Workflows/documents/create-presentation.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/documents/create-presentation",
+      "title": "Workflow — Create a Presentation",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "documents",
+        "presentation"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Create a Presentation  Slide deck for a meeting, pitch, or review.",
+      "wordCount": 229
+    },
+    {
+      "path": "03_Workflows/documents/create-report.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/documents/create-report",
+      "title": "Workflow — Create a Report",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "documents",
+        "report"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Create a Report  Word document with formal structure — executive summary, sections, conclusions.",
+      "wordCount": 223
+    },
+    {
+      "path": "03_Workflows/documents/create-spreadsheet.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/documents/create-spreadsheet",
+      "title": "Workflow — Create a Spreadsheet",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "documents",
+        "spreadsheet"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Create a Spreadsheet  Data table, financial model, tracker, or analysis output as Excel.",
+      "wordCount": 182
+    },
+    {
+      "path": "03_Workflows/productivity/daily-review.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/productivity/daily-review",
+      "title": "Workflow — Daily Review",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "productivity",
+        "review"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Daily Review  Morning planning pass. Five to ten minutes.",
+      "wordCount": 180
+    },
+    {
+      "path": "03_Workflows/productivity/inbox-zero.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/productivity/inbox-zero",
+      "title": "Workflow — Inbox Zero",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "productivity",
+        "inbox"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Inbox Zero  Process [[07_Inbox/README]] until empty. The vault inbox, not email — though the same logic applies.",
+      "wordCount": 161
+    },
+    {
+      "path": "03_Workflows/productivity/meeting-prep.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/productivity/meeting-prep",
+      "title": "Workflow — Meeting Prep",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "productivity",
+        "meeting"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Meeting Prep  Get ready for a specific meeting. 5-15 minutes depending on stakes.",
+      "wordCount": 189
+    },
+    {
+      "path": "03_Workflows/productivity/weekly-review.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/productivity/weekly-review",
+      "title": "Workflow — Weekly Review",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "productivity",
+        "review"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Weekly Review  Friday afternoon retrospective + next-week plan. 30 minutes.",
+      "wordCount": 189
+    },
+    {
+      "path": "03_Workflows/research/deep-research.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/research/deep-research",
+      "title": "Workflow — Deep Research",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "research"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Deep Research  Multi-source investigation with synthesis. Use when Vladimir needs to understand a topic well enough to make a decision or explain it to someone else.",
+      "wordCount": 297
+    },
+    {
+      "path": "03_Workflows/research/quick-lookup.md",
+      "folder": "03_Workflows",
+      "slug": "03_Workflows/research/quick-lookup",
+      "title": "Workflow — Quick Lookup",
+      "type": "workflow",
+      "tags": [
+        "workflow",
+        "research"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Quick Lookup  Fast factual answer. One or two queries, direct response, no synthesis ceremony.",
+      "wordCount": 130
+    },
+    {
+      "path": "04_Projects/README.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/README",
+      "title": "Projects — Active Work",
+      "type": "moc",
+      "tags": [
+        "project",
+        "moc",
+        "active"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Projects  Active work with a defined outcome and a deadline (even a soft one). Each project gets its own folder containing notes, drafts, deliverables, and a `_index.md`.",
+      "wordCount": 207
+    },
+    {
+      "path": "04_Projects/archive/README.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/archive/README",
+      "title": "Project Archive",
+      "type": "moc",
+      "tags": [
+        "project",
+        "archive"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Project Archive  Closed projects, kept for reference. Don't delete — past project folders are some of the best reference material the vault has.",
+      "wordCount": 30
+    },
+    {
+      "path": "04_Projects/vmes/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/_index",
+      "title": "Project — VMES",
+      "type": "project",
+      "tags": [
+        "project",
+        "active",
+        "vmes",
+        "product"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Project — VMES  Virtual Manufacturing Execution System. Industrial analytics and real-time production monitoring with an engineering-grade interface. Vladimir owns it and ships it.",
+      "wordCount": 639
+    },
+    {
+      "path": "04_Projects/vmes/crm/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/crm/_index",
+      "title": "VMES — CRM (crm.vmes.ro)",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "crm"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — CRM (crm.vmes.ro)  Vladimir's CRM, served at `crm.vmes.ro`. First-party — built and operated alongside VMES.",
+      "wordCount": 327
+    },
+    {
+      "path": "04_Projects/vmes/integrations/02-monitor-live-site.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/integrations/02-monitor-live-site",
+      "title": "Track 2 — Monitor the Live Site",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "integration",
+        "monitoring"
+      ],
+      "status": "ready",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Track 2 — Monitor the Live Site  Jarvis fetches vmes.ro (and eventually crm.vmes.ro) on a schedule. Captures uptime, response time, meta drift, and SEO posture. Writes to `04_Projects/vmes/site/monitoring-log.md`.",
+      "wordCount": 309
+    },
+    {
+      "path": "04_Projects/vmes/integrations/03-publish-vault-to-site.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/integrations/03-publish-vault-to-site",
+      "title": "Track 3 — Publish Vault Content to vmes.ro",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "integration",
+        "publishing"
+      ],
+      "status": "blocked",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Track 3 — Publish Vault Content to vmes.ro  Author docs, blog posts, or product pages in the vault. A pipeline pushes them to vmes.ro on commit.",
+      "wordCount": 347
+    },
+    {
+      "path": "04_Projects/vmes/integrations/04-pull-data-to-vault.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/integrations/04-pull-data-to-vault",
+      "title": "Track 4 — Pull Live Data from VMES into Vault",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "integration",
+        "data"
+      ],
+      "status": "blocked",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Track 4 — Pull Live Data from VMES into Vault  Expose VMES + CRM data to Jarvis so he can answer questions about production state, customer pipeline, and operational metrics — without Vladimir having to re-explain every time.",
+      "wordCount": 410
+    },
+    {
+      "path": "04_Projects/vmes/integrations/05-github-wiring.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/integrations/05-github-wiring",
+      "title": "Track 5 — GitHub Repo Wiring",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "integration",
+        "github"
+      ],
+      "status": "blocked",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Track 5 — GitHub Repo Wiring  Give Jarvis structured access to the VMES GitHub repo. Read PRs, issues, releases, commits. Eventually draft PRs and comment.",
+      "wordCount": 382
+    },
+    {
+      "path": "04_Projects/vmes/integrations/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/integrations/_index",
+      "title": "VMES — Integration Roadmap",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "integration"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Integration Roadmap  Five tracks for linking the vault to VMES. Sequenced by dependency.",
+      "wordCount": 287
+    },
+    {
+      "path": "04_Projects/vmes/marketing/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/marketing/_index",
+      "title": "VMES — Marketing",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "marketing"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Marketing  The demand side of VMES: getting the right people to vmes.ro, converting them to demos, and turning those into customers in the CRM. This folder holds anything Jarvis should remember or run on a recurring basis to suppor",
+      "wordCount": 452
+    },
+    {
+      "path": "04_Projects/vmes/marketing/ads.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/marketing/ads",
+      "title": "VMES — Paid Acquisition",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "marketing",
+        "ads"
+      ],
+      "status": "spec",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Paid Acquisition  How VMES spends money to get qualified attention. This file holds the strategy and the per-channel plans; campaign-specific notes (creatives, copy variants, A/B results) go in dated subfiles when active.",
+      "wordCount": 729
+    },
+    {
+      "path": "04_Projects/vmes/marketing/scraping.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/marketing/scraping",
+      "title": "VMES — Web Scraping",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "marketing",
+        "scraping",
+        "intel"
+      ],
+      "status": "spec",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Web Scraping  What Jarvis fetches from third-party sites on behalf of VMES, why, and where the results land. Distinct from [[04_Projects/vmes/integrations/02-monitor-live-site]], which monitors *Vladimir's own* surfaces — this file",
+      "wordCount": 777
+    },
+    {
+      "path": "04_Projects/vmes/marketing/seo.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/marketing/seo",
+      "title": "VMES — SEO",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "marketing",
+        "seo"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — SEO  Organic search posture for vmes.ro. Where the site is strong, where it's leaking visibility, and the actions that move ranking-relevant signals.",
+      "wordCount": 898
+    },
+    {
+      "path": "04_Projects/vmes/repo/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/repo/_index",
+      "title": "VMES — Source Repo",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "repo",
+        "github"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Source Repo  GitHub repo backing vmes.ro and crm.vmes.ro. Vladimir owns and ships from it.",
+      "wordCount": 197
+    },
+    {
+      "path": "04_Projects/vmes/site/_index.md",
+      "folder": "04_Projects",
+      "slug": "04_Projects/vmes/site/_index",
+      "title": "VMES — Marketing Site (vmes.ro)",
+      "type": "project",
+      "tags": [
+        "project",
+        "vmes",
+        "site",
+        "marketing"
+      ],
+      "status": "active",
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# VMES — Marketing Site (vmes.ro)  The public face of VMES. Currently a single-page React/Vite SPA.",
+      "wordCount": 288
+    },
+    {
+      "path": "05_Knowledge/README.md",
+      "folder": "05_Knowledge",
+      "slug": "05_Knowledge/README",
+      "title": "Knowledge — Durable References",
+      "type": "moc",
+      "tags": [
+        "knowledge",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Knowledge  Durable subject knowledge. Things that are true regardless of any specific project.",
+      "wordCount": 207
+    },
+    {
+      "path": "05_Knowledge/domains/README.md",
+      "folder": "05_Knowledge",
+      "slug": "05_Knowledge/domains/README",
+      "title": "Knowledge Domains",
+      "type": "moc",
+      "tags": [
+        "knowledge",
+        "domain",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Domains  One folder per subject area. Create a domain folder when knowledge in that area starts overflowing into ad-hoc files.",
+      "wordCount": 93
+    },
+    {
+      "path": "05_Knowledge/glossary.md",
+      "folder": "05_Knowledge",
+      "slug": "05_Knowledge/glossary",
+      "title": "Glossary",
+      "type": "knowledge",
+      "tags": [
+        "knowledge",
+        "glossary"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Glossary  Cross-domain terms. Terms specific to one domain belong in that domain's folder.",
+      "wordCount": 74
+    },
+    {
+      "path": "05_Knowledge/references/README.md",
+      "folder": "05_Knowledge",
+      "slug": "05_Knowledge/references/README",
+      "title": "References",
+      "type": "moc",
+      "tags": [
+        "knowledge",
+        "reference",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# References  External resources worth remembering — books, papers, tools, websites.",
+      "wordCount": 87
+    },
+    {
+      "path": "06_Memory/README.md",
+      "folder": "06_Memory",
+      "slug": "06_Memory/README",
+      "title": "Memory — Decisions, Learnings, Episodes",
+      "type": "moc",
+      "tags": [
+        "memory",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Memory  What happened. Append-only. The vault's autobiography.",
+      "wordCount": 233
+    },
+    {
+      "path": "06_Memory/decisions/README.md",
+      "folder": "06_Memory",
+      "slug": "06_Memory/decisions/README",
+      "title": "Decisions",
+      "type": "moc",
+      "tags": [
+        "memory",
+        "decision",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Decisions  Notable choices and their reasoning. Use [[99_Templates/decision]] as the template.",
+      "wordCount": 78
+    },
+    {
+      "path": "06_Memory/episodes/README.md",
+      "folder": "06_Memory",
+      "slug": "06_Memory/episodes/README",
+      "title": "Episodes",
+      "type": "moc",
+      "tags": [
+        "memory",
+        "episode",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Episodes  What happened on a given day or in a notable session. Daily notes, weekly reviews, meeting notes, post-mortems.",
+      "wordCount": 76
+    },
+    {
+      "path": "06_Memory/facts.md",
+      "folder": "06_Memory",
+      "slug": "06_Memory/facts",
+      "title": "Durable Facts",
+      "type": "memory",
+      "tags": [
+        "memory",
+        "facts"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Durable Facts  Small set of facts Jarvis should keep loaded. Update when they change. Unlike most of `06_Memory`, this file is editable in place — it's a snapshot, not a journal.",
+      "wordCount": 212
+    },
+    {
+      "path": "06_Memory/learnings/README.md",
+      "folder": "06_Memory",
+      "slug": "06_Memory/learnings/README",
+      "title": "Learnings",
+      "type": "moc",
+      "tags": [
+        "memory",
+        "learning",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Learnings  Things discovered that should outlive the moment. Use [[99_Templates/learning]] as the template.",
+      "wordCount": 88
+    },
+    {
+      "path": "07_Inbox/README.md",
+      "folder": "07_Inbox",
+      "slug": "07_Inbox/README",
+      "title": "Inbox — Capture Buffer",
+      "type": "moc",
+      "tags": [
+        "inbox",
+        "capture",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Inbox  Unprocessed capture. Drop things here when you don't want to file them yet.",
+      "wordCount": 122
+    },
+    {
+      "path": "99_Templates/README.md",
+      "folder": "99_Templates",
+      "slug": "99_Templates/README",
+      "title": "Templates",
+      "type": "moc",
+      "tags": [
+        "template",
+        "moc"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Templates  Reusable starting points. Copy a template into the right folder, rename, fill in.",
+      "wordCount": 118
+    },
+    {
+      "path": "README.md",
+      "folder": "_root",
+      "slug": "README",
+      "title": "Jarvis Knowledge Vault",
+      "type": "index",
+      "tags": [
+        "meta",
+        "root"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Jarvis Knowledge Vault  This vault is the long-term memory and operating manual for **Jarvis** — the AI assistant working alongside Vladimir. Every folder serves a specific purpose; nothing is decorative.",
+      "wordCount": 351
+    },
+    {
+      "path": "Welcome.md",
+      "folder": "_root",
+      "slug": "Welcome",
+      "title": "Welcome",
+      "type": "note",
+      "tags": [
+        "meta"
+      ],
+      "status": null,
+      "updated": "2026-05-08",
+      "aliases": [],
+      "excerpt": "# Welcome  This is the **Jarvis Knowledge Vault**. Start at [[README]].",
+      "wordCount": 34
+    }
+  ]
+}

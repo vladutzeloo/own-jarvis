@@ -1,0 +1,3 @@
+## 2025-02-27 - Keyboard Navigation & Custom Hover States
+**Learning:** Custom hover states (like `.card-hover` or `bg-bg-subtle` with custom transition colors) and global custom outlines often suppress default browser focus rings on interactive elements like links. This makes keyboard navigation entirely invisible unless explicitly restored.
+**Action:** When creating links, cards, or custom buttons with hover states, always explicitly pair them with `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary` (and offsets if needed) to ensure keyboard users can see where they are on the page. Also, remember to add a "Skip to main content" link for complex layouts.

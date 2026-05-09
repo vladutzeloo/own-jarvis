@@ -52,7 +52,7 @@ export function Dashboard() {
           <Link
             key={label}
             to={to}
-            className="card card-hover group p-5"
+            className="card card-hover group p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
           >
             <div className="flex items-start justify-between">
               <Icon size={16} className="text-fg-subtle group-hover:text-primary" />

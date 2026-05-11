@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Jarvis</title>
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #222;
+      --accent: #4f8ef7;
+      --text: #e8e8e8;
+      --muted: #666;
+      --user-bg: #1a2a4a;
+      --ai-bg: #141414;
+      --danger: #c0392b;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 1.5; overflow: hidden; }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    #app { display: flex; flex-direction: column; height: 100dvh; }
+
+    /* ── Top bar ────────────────────────────────────────── */
+    #topbar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    #topbar h1 { font-size: 17px; font-weight: 600; flex: 1; }
+    #status-dot { width: 8px; height: 8px; border-radius: 50%; background: #444; flex-shrink: 0; }
+    #status-dot.ok { background: #2ecc71; }
+    #status-dot.err { background: var(--danger); }
+    #menu-btn { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 2px 6px; }
+
+    /* ── Tabs ───────────────────────────────────────────── */
+    #tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .tab { flex: 1; padding: 10px 0; text-align: center; font-size: 13px; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── Panels ─────────────────────────────────────────── */
+    .panel { flex: 1; overflow-y: auto; display: none; }
+    .panel.active { display: flex; flex-direction: column; }
+
+    /* ── Chat panel ─────────────────────────────────────── */
+    #chat-messages { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+    .msg { max-width: 88%; padding: 10px 13px; border-radius: 14px; font-size: 14px; line-height: 1.55; word-break: break-word; }
+    .msg.user { background: var(--user-bg); align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg.assistant { background: var(--ai-bg); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg.assistant pre { background: #1a1a1a; border: 1px solid var(--border); border-radius: 6px; padding: 10px; overflow-x: auto; margin: 8px 0; font-size: 13px; }
+    .msg.assistant code { font-family: 'Fira Mono', 'Consolas', monospace; font-size: 13px; }
+    .msg.assistant p { margin: 4px 0; }
+    .msg.assistant ul, .msg.assistant ol { padding-left: 18px; margin: 4px 0; }
+    .msg.thinking { color: var(--muted); font-style: italic; font-size: 13px; }
+
+    #chat-input-row { display: flex; gap: 8px; padding: 10px 12px; background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+    #chat-input { flex: 1; background: #1c1c1c; border: 1px solid var(--border); color: var(--text); border-radius: 20px; padding: 10px 14px; font-size: 15px; resize: none; max-height: 120px; line-height: 1.4; outline: none; }
+    #chat-input:focus { border-color: var(--accent); }
+    #send-btn { background: var(--accent); border: none; color: #fff; border-radius: 50%; width: 40px; height: 40px; flex-shrink: 0; align-self: flex-end; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+    #send-btn:disabled { opacity: .4; cursor: default; }
+
+    #session-bar { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 12px; color: var(--muted); flex-shrink: 0; }
+    #new-chat-btn { margin-left: auto; background: none; border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+    #new-chat-btn:hover { color: var(--text); border-color: #444; }
+
+    /* ── Vault panel ────────────────────────────────────── */
+    #vault-header { padding: 12px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; display: flex; gap: 8px; }
+    #vault-search { flex: 1; background: #1c1c1c; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 8px 12px; font-size: 14px; outline: none; }
+    #vault-search:focus { border-color: var(--accent); }
+    #new-note-btn { background: var(--accent); border: none; color: #fff; border-radius: 8px; padding: 8px 14px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+
+    #vault-list { flex: 1; overflow-y: auto; }
+    .vault-item { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; }
+    .vault-item:hover { background: var(--surface); }
+    .vault-item .note-title { font-size: 14px; font-weight: 500; }
+    .vault-item .note-path { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* Note viewer */
+    #note-view { position: fixed; inset: 0; background: var(--bg); z-index: 50; display: none; flex-direction: column; }
+    #note-view.open { display: flex; }
+    #note-view-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    #note-back-btn { background: none; border: none; color: var(--accent); font-size: 15px; cursor: pointer; }
+    #note-view-title { flex: 1; font-size: 15px; font-weight: 600; }
+    #note-edit-btn, #note-save-btn { background: none; border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 4px 12px; font-size: 13px; cursor: pointer; }
+    #note-edit-btn:hover, #note-save-btn:hover { border-color: var(--accent); color: var(--accent); }
+    #note-content { flex: 1; padding: 16px; overflow-y: auto; font-size: 14px; line-height: 1.65; }
+    #note-content.editing { padding: 0; }
+    #note-textarea { width: 100%; height: 100%; background: var(--bg); border: none; color: var(--text); font-size: 14px; line-height: 1.65; padding: 16px; resize: none; outline: none; font-family: 'Fira Mono', monospace; }
+    #note-content h1, #note-content h2, #note-content h3 { margin: 14px 0 6px; }
+    #note-content p { margin: 6px 0; }
+    #note-content ul, #note-content ol { padding-left: 20px; margin: 6px 0; }
+    #note-content pre { background: #1a1a1a; border: 1px solid var(--border); border-radius: 6px; padding: 10px; overflow-x: auto; margin: 8px 0; }
+    #note-content code { font-family: 'Fira Mono', monospace; font-size: 13px; }
+    #note-content a { color: var(--accent); }
+
+    /* ── History panel ──────────────────────────────────── */
+    #history-list { flex: 1; overflow-y: auto; }
+    .history-item { padding: 13px 16px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+    .history-item:hover { background: var(--surface); }
+    .history-item .h-title { flex: 1; font-size: 14px; }
+    .history-item .h-date { font-size: 11px; color: var(--muted); }
+    .history-item .h-del { background: none; border: none; color: var(--muted); font-size: 16px; padding: 2px 6px; cursor: pointer; }
+    .history-item .h-del:hover { color: var(--danger); }
+    #history-empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    /* ── Auth overlay ───────────────────────────────────── */
+    #auth-overlay { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 100; }
+    #auth-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; width: min(90vw, 340px); text-align: center; }
+    #auth-box h2 { font-size: 22px; margin-bottom: 6px; }
+    #auth-box p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+    #auth-input { width: 100%; background: #1c1c1c; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 12px 14px; font-size: 15px; outline: none; margin-bottom: 12px; }
+    #auth-input:focus { border-color: var(--accent); }
+    #auth-btn { width: 100%; background: var(--accent); border: none; color: #fff; border-radius: 8px; padding: 12px; font-size: 15px; cursor: pointer; font-weight: 600; }
+    #auth-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
+
+    /* Misc */
+    .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px; flex: 1; display: flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body>
+
+<!-- Auth overlay -->
+<div id="auth-overlay">
+  <div id="auth-box">
+    <h2>Jarvis</h2>
+    <p>Enter your access key to continue</p>
+    <input id="auth-input" type="password" placeholder="Access key" autocomplete="current-password">
+    <button id="auth-btn">Unlock</button>
+    <div id="auth-error">Wrong key — try again</div>
+  </div>
+</div>
+
+<!-- Main app -->
+<div id="app" style="display:none">
+  <div id="topbar">
+    <h1>Jarvis</h1>
+    <div id="status-dot" title="Checking AI..."></div>
+    <button id="menu-btn" title="Sync vault">⟳</button>
+  </div>
+
+  <div id="tabs">
+    <button class="tab active" data-tab="chat">Chat</button>
+    <button class="tab" data-tab="vault">Vault</button>
+    <button class="tab" data-tab="history">History</button>
+  </div>
+
+  <!-- Chat panel -->
+  <div class="panel active" id="panel-chat">
+    <div id="session-bar">
+      <span id="session-label">New session</span>
+      <button id="new-chat-btn">+ New</button>
+    </div>
+    <div id="chat-messages">
+      <div class="empty-state">Say something to Jarvis</div>
+    </div>
+    <div id="chat-input-row">
+      <textarea id="chat-input" placeholder="Message Jarvis…" rows="1"></textarea>
+      <button id="send-btn">↑</button>
+    </div>
+  </div>
+
+  <!-- Vault panel -->
+  <div class="panel" id="panel-vault">
+    <div id="vault-header">
+      <input id="vault-search" type="search" placeholder="Search notes…">
+      <button id="new-note-btn">+ Note</button>
+    </div>
+    <div id="vault-list"><div class="empty-state"><span class="loading-spinner"></span></div></div>
+  </div>
+
+  <!-- History panel -->
+  <div class="panel" id="panel-history">
+    <div id="history-list"><div id="history-empty">No conversations yet</div></div>
+  </div>
+</div>
+
+<!-- Note viewer/editor -->
+<div id="note-view">
+  <div id="note-view-header">
+    <button id="note-back-btn">← Back</button>
+    <span id="note-view-title"></span>
+    <button id="note-edit-btn">Edit</button>
+    <button id="note-save-btn" style="display:none">Save</button>
+  </div>
+  <div id="note-content"></div>
+</div>
+
+<script>
+const API = '';
+let SECRET = localStorage.getItem('jarvis_secret') || '';
+let currentSessionId = null;
+let allNotes = [];
+let currentNotePath = null;
+let noteEditing = false;
+
+// ── Auth ──────────────────────────────────────────────────────────────────
+const authOverlay = document.getElementById('auth-overlay');
+const authInput = document.getElementById('auth-input');
+const authBtn = document.getElementById('auth-btn');
+const authError = document.getElementById('auth-error');
+
+async function tryUnlock(key) {
+  try {
+    const res = await apiFetch('/api/status', { method: 'GET' }, key);
+    if (res.ok) {
+      SECRET = key;
+      localStorage.setItem('jarvis_secret', key);
+      authOverlay.style.display = 'none';
+      document.getElementById('app').style.display = 'flex';
+      init();
+    } else {
+      authError.style.display = 'block';
+      authError.textContent = 'Wrong key — try again';
+    }
+  } catch {
+    authError.style.display = 'block';
+    authError.textContent = 'Cannot reach server';
+  }
+}
+
+authBtn.onclick = () => tryUnlock(authInput.value.trim());
+authInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') authBtn.click(); });
+
+if (SECRET) tryUnlock(SECRET);
+
+// ── API helper ────────────────────────────────────────────────────────────
+async function apiFetch(path, opts = {}, secret = SECRET) {
+  return fetch(API + path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${secret}`,
+      ...(opts.headers || {}),
+    },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+}
+
+async function apiJSON(path, opts = {}) {
+  const res = await apiFetch(path, opts);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+function init() {
+  checkStatus();
+  loadVault();
+  loadHistory();
+  setupTabs();
+  setupChat();
+  setupVault();
+  setupMenu();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+}
+
+// ── Status dot ────────────────────────────────────────────────────────────
+async function checkStatus() {
+  const dot = document.getElementById('status-dot');
+  try {
+    const data = await apiJSON('/api/status');
+    dot.className = (data.ollama?.ok && data.ollama?.modelAvailable) ? 'ok' : 'err';
+    dot.title = data.ollama?.ok
+      ? `Model: ${data.ollama.using}`
+      : `AI issue: ${data.ollama?.error || 'model missing'}`;
+  } catch {
+    dot.className = 'err';
+    dot.title = 'Server unreachable';
+  }
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function setupTabs() {
+  document.querySelectorAll('.tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+}
+
+// ── Chat ──────────────────────────────────────────────────────────────────
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+const sessionLabel = document.getElementById('session-label');
+
+function setupChat() {
+  sendBtn.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+  chatInput.addEventListener('input', () => {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+  });
+  document.getElementById('new-chat-btn').addEventListener('click', startNewChat);
+}
+
+function startNewChat() {
+  currentSessionId = null;
+  chatMessages.innerHTML = '<div class="empty-state">Say something to Jarvis</div>';
+  sessionLabel.textContent = 'New session';
+  chatInput.focus();
+}
+
+async function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  chatInput.value = '';
+  chatInput.style.height = 'auto';
+  sendBtn.disabled = true;
+
+  // Remove empty state
+  const empty = chatMessages.querySelector('.empty-state');
+  if (empty) empty.remove();
+
+  appendMsg('user', text);
+
+  const thinking = appendMsg('assistant', '<span class="loading-spinner"></span>', true);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    const data = await apiJSON('/api/chat', {
+      method: 'POST',
+      body: { message: text, sessionId: currentSessionId },
+    });
+    currentSessionId = data.sessionId;
+    sessionLabel.textContent = text.slice(0, 40) + (text.length > 40 ? '…' : '');
+    thinking.innerHTML = marked.parse(data.reply);
+    thinking.classList.remove('thinking');
+  } catch (err) {
+    thinking.textContent = 'Error: ' + err.message;
+  }
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  sendBtn.disabled = false;
+  chatInput.focus();
+}
+
+function appendMsg(role, html, isThinking = false) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + role + (isThinking ? ' thinking' : '');
+  div.innerHTML = isThinking ? html : (role === 'user' ? escapeHtml(html) : marked.parse(html));
+  chatMessages.appendChild(div);
+  return div;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Vault ─────────────────────────────────────────────────────────────────
+const vaultList = document.getElementById('vault-list');
+const vaultSearch = document.getElementById('vault-search');
+
+async function loadVault() {
+  try {
+    allNotes = await apiJSON('/api/vault');
+    renderVaultList(allNotes);
+  } catch (err) {
+    vaultList.innerHTML = `<div class="empty-state">Failed to load vault: ${err.message}</div>`;
+  }
+}
+
+function renderVaultList(notes) {
+  if (!notes.length) { vaultList.innerHTML = '<div class="empty-state">No notes found</div>'; return; }
+  vaultList.innerHTML = notes.map((n) => `
+    <div class="vault-item" data-path="${escapeHtml(n.path)}">
+      <div class="note-title">${escapeHtml(n.title)}</div>
+      <div class="note-path">${escapeHtml(n.path)}</div>
+    </div>
+  `).join('');
+  vaultList.querySelectorAll('.vault-item').forEach((el) => {
+    el.addEventListener('click', () => openNote(el.dataset.path));
+  });
+}
+
+function setupVault() {
+  vaultSearch.addEventListener('input', () => {
+    const q = vaultSearch.value.toLowerCase();
+    renderVaultList(q ? allNotes.filter((n) => n.title.toLowerCase().includes(q) || n.path.toLowerCase().includes(q)) : allNotes);
+  });
+
+  document.getElementById('new-note-btn').addEventListener('click', () => {
+    const path = prompt('Note path (e.g. 07_Inbox/my-idea.md):');
+    if (!path) return;
+    openNoteEditor(path, '# ' + path.split('/').pop().replace('.md', '') + '\n\n', true);
+  });
+
+  document.getElementById('note-back-btn').addEventListener('click', closeNote);
+  document.getElementById('note-edit-btn').addEventListener('click', toggleEdit);
+  document.getElementById('note-save-btn').addEventListener('click', saveNote);
+}
+
+async function openNote(path) {
+  currentNotePath = path;
+  noteEditing = false;
+  document.getElementById('note-view-title').textContent = path.split('/').pop().replace('.md', '');
+  document.getElementById('note-content').innerHTML = '<div class="empty-state"><span class="loading-spinner"></span></div>';
+  document.getElementById('note-view').classList.add('open');
+  document.getElementById('note-edit-btn').style.display = '';
+  document.getElementById('note-save-btn').style.display = 'none';
+
+  try {
+    const data = await apiJSON('/api/vault/read?path=' + encodeURIComponent(path));
+    const nc = document.getElementById('note-content');
+    nc.className = '';
+    nc.innerHTML = marked.parse(data.content);
+    nc.dataset.raw = data.content;
+  } catch (err) {
+    document.getElementById('note-content').innerHTML = `<div class="empty-state">Error: ${err.message}</div>`;
+  }
+}
+
+function openNoteEditor(path, content, isNew = false) {
+  currentNotePath = path;
+  noteEditing = true;
+  document.getElementById('note-view-title').textContent = isNew ? 'New note' : path.split('/').pop().replace('.md', '');
+  document.getElementById('note-edit-btn').style.display = 'none';
+  document.getElementById('note-save-btn').style.display = '';
+  const nc = document.getElementById('note-content');
+  nc.className = 'editing';
+  nc.innerHTML = `<textarea id="note-textarea">${escapeHtml(content)}</textarea>`;
+  document.getElementById('note-view').classList.add('open');
+}
+
+function toggleEdit() {
+  const nc = document.getElementById('note-content');
+  const raw = nc.dataset.raw || '';
+  openNoteEditor(currentNotePath, raw);
+}
+
+async function saveNote() {
+  const content = document.getElementById('note-textarea')?.value;
+  if (!content || !currentNotePath) return;
+  document.getElementById('note-save-btn').textContent = 'Saving…';
+  try {
+    await apiJSON('/api/vault/write', { method: 'POST', body: { path: currentNotePath, content } });
+    await openNote(currentNotePath);
+    loadVault();
+  } catch (err) {
+    alert('Save failed: ' + err.message);
+    document.getElementById('note-save-btn').textContent = 'Save';
+  }
+}
+
+function closeNote() {
+  document.getElementById('note-view').classList.remove('open');
+  currentNotePath = null;
+}
+
+// ── History ───────────────────────────────────────────────────────────────
+async function loadHistory() {
+  try {
+    const sessions = await apiJSON('/api/sessions');
+    renderHistory(sessions);
+  } catch {}
+}
+
+function renderHistory(sessions) {
+  const list = document.getElementById('history-list');
+  if (!sessions.length) { list.innerHTML = '<div id="history-empty">No conversations yet</div>'; return; }
+  list.innerHTML = sessions.map((s) => `
+    <div class="history-item" data-id="${s.id}">
+      <span class="h-title">${escapeHtml(s.title)}</span>
+      <span class="h-date">${fmtDate(s.updated_at)}</span>
+      <button class="h-del" data-id="${s.id}" title="Delete">✕</button>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.history-item').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (e.target.classList.contains('h-del')) return;
+      loadSession(el.dataset.id, el.querySelector('.h-title').textContent);
+    });
+  });
+  list.querySelectorAll('.h-del').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (!confirm('Delete this conversation?')) return;
+      await apiJSON('/api/sessions/' + btn.dataset.id, { method: 'DELETE' });
+      loadHistory();
+    });
+  });
+}
+
+async function loadSession(id, title) {
+  try {
+    const data = await apiJSON('/api/sessions/' + id);
+    currentSessionId = id;
+    sessionLabel.textContent = title;
+    chatMessages.innerHTML = '';
+    for (const msg of data.messages) {
+      appendMsg(msg.role, msg.content);
+    }
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    // Switch to chat tab
+    document.querySelector('[data-tab="chat"]').click();
+  } catch (err) {
+    alert('Failed to load session: ' + err.message);
+  }
+}
+
+function fmtDate(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  if (d.toDateString() === now.toDateString()) return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+}
+
+// ── Menu / Sync ───────────────────────────────────────────────────────────
+function setupMenu() {
+  document.getElementById('menu-btn').addEventListener('click', async () => {
+    document.getElementById('menu-btn').textContent = '⟳';
+    try {
+      await apiJSON('/api/vault/sync', { method: 'POST' });
+      await loadVault();
+      await checkStatus();
+      document.getElementById('menu-btn').textContent = '✓';
+    } catch {
+      document.getElementById('menu-btn').textContent = '✗';
+    }
+    setTimeout(() => { document.getElementById('menu-btn').textContent = '⟳'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

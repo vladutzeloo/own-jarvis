@@ -21,6 +21,8 @@ Jarvis is not a single program. It's a persona that runs on whichever Claude sur
 | Claude Code on the web | Browser-hosted coding sandbox at claude.ai/code. Linux container, ephemeral filesystem. | `/home/user/own-jarvis` (sandbox path; the GitHub repo is the source of truth) | Used for repo work on `vladutzeloo/own-jarvis`. |
 | Claude Code CLI | Local terminal install, runs against the real Windows filesystem. | Wherever the working directory points | Same model as the web surface; different file boundary. |
 | Claude API / Agent SDK | Programmatic — for custom agents Vladimir might build. | N/A — caller-supplied | See [[02_Capabilities/agents/README]]. |
+| **Phone PWA** | Mobile-first chat web app at `https://jarvis.vmes.ro`. Installable to Android home screen. | Vault clone at `/var/jarvis/vault` on the VPS (git-synced). | Uses Qwen Coder via Ollama on the OpenJarvis VPS. Same session DB as jarvis.exe. |
+| **jarvis.exe (desktop)** | Tauri app running on Windows with WSL backend. | Local Obsidian vault (git-synced to GitHub). | Calls the same VPS API (`https://jarvis.vmes.ro/api/`). Shares sessions with the phone PWA. |
 
 The vault is replicated; it is the same content on each surface, but the path differs. Anything written to `C:\Users\vdzoo\Documents\obsidian\brain` from Cowork lands in `/home/user/own-jarvis` when Claude Code on the web pulls from GitHub, and vice-versa, mediated by `git`.
 
@@ -33,6 +35,7 @@ The model is set per surface and changes over time. Don't hard-code assumptions 
 | Claude Code on the web | `claude-opus-4-7` |
 | Cowork desktop | *Fill in: confirm current default.* |
 | Claude API projects | Whichever Vladimir pins per project |
+| Phone PWA / jarvis.exe | `qwen2.5-coder:7b` via Ollama on the OpenJarvis VPS (local AI — no Anthropic) |
 
 The latest family is Claude 4.x. IDs in use: Opus 4.7 (`claude-opus-4-7`), Sonnet 4.6 (`claude-sonnet-4-6`), Haiku 4.5 (`claude-haiku-4-5-20251001`). When building anything against the API, default to the latest available — see [[02_Capabilities/skills/skill-creator]].
 
